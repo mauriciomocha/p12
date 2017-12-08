@@ -1,5 +1,5 @@
 package vista;
 
-public class VntPrincipal {
+public class VntPrincipal    {
 
 }
