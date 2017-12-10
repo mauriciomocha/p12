@@ -5,7 +5,6 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -18,14 +17,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-
 import controlador.GestionEmpresa;
 
-
-public class VntEmpresa extends JInternalFrame implements ActionListener {
+public class VntDepartamento extends JInternalFrame implements ActionListener{
 	private JTextField txtNombre;
-	private JTextField txtDireccion;
-	private JTextField txtDepartamento;
+	private JTextField txtEmpleado;
 	private JTextArea txtListado;
 
 	private GestionEmpresa ge;
@@ -39,23 +35,23 @@ public class VntEmpresa extends JInternalFrame implements ActionListener {
 
 	}
 
-	public VntEmpresa(GestionEmpresa ge) {
+	public VntDepartamento(GestionEmpresa ge) {
 		this.ge = ge;
 		initComponets();
 		setSize(369, 335);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(new GridLayout(2, 1));
 
-		JLabel etiqueta1 = new JLabel("Nombre Empresa: ");
-		JLabel etiqueta2 = new JLabel("Direccion: ");
-		JLabel etiqueta3 = new JLabel("Departamento: ");
+		JLabel etiqueta1 = new JLabel("Nombre : ");
+		JLabel etiqueta2 = new JLabel("Empleado: ");
+
 		
 		
 		
 		
 		
 		txtNombre=new JTextField(20);
-		txtDireccion = new JTextField(20);
+		txtEmpleado = new JTextField(20);
 	
 		txtListado = new JTextArea(5, 20);
 		
@@ -78,9 +74,8 @@ public class VntEmpresa extends JInternalFrame implements ActionListener {
 		panel1.add(etiqueta1);
 		panel1.add(txtNombre);
 		panel1.add(etiqueta2);
-		panel1.add(txtDireccion);
-		panel1.add(etiqueta3);
-		panel1.add(txtDepartamento);
+		panel1.add(txtEmpleado);
+		
 	
 
 		panel1.add(boton1, BorderLayout.SOUTH);
@@ -137,8 +132,8 @@ public class VntEmpresa extends JInternalFrame implements ActionListener {
 	
 	/*public void guardar(){
 		String nombre = txtNombre.getText();
-		String direccion= txtDireccion.getText();
-		String departamento=txtDepartamento.getText();
+		String empleado= txtEmpleado.getText();
+	
 		
 	//	ge.
 	//	JOptionPane.showMessageDialog(this, "Datos guardados", 
@@ -164,11 +159,12 @@ public class VntEmpresa extends JInternalFrame implements ActionListener {
 
 	public void vaciar() {
 		txtNombre.setText("");
-		txtDireccion.setText("");
-		txtDepartamento.setText("");
+		txtEmpleado.setText("");
+
 	
 
 	}
+
 
 
 }
