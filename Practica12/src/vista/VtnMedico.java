@@ -160,6 +160,7 @@ public class VtnMedico extends JInternalFrame implements ActionListener {
 		txttitulo.setText("");
 		txtcedula.setText("");
 		txtedad.setText("");
+		
 
 	}
 
@@ -172,8 +173,18 @@ public class VtnMedico extends JInternalFrame implements ActionListener {
 		Consulta consulta=(Consulta)comConsulta.getSelectedItem();
 		int edad = Integer.parseInt(txtedad.getText());
 
+		
+		try{
+			if(gp.isCedulaValida(cedula)) {
 		gp.agregarMedico(nombre, apellido, cedula, edad,  titulo,  consulta);
 		listar();
+			}
+		
+		}catch (Exception e) {
+			JOptionPane.showMessageDialog(this, e.getMessage(),
+					"Mensaje de error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
 
 	}
 
@@ -182,13 +193,25 @@ public class VtnMedico extends JInternalFrame implements ActionListener {
 		txtListado.setText("");
 		for (int i = 0; i < medicos.size(); i++) {
 			Medico medico = medicos.get(i);
-			System.out.println("Nombre: " + medico.getNombre() + "\n" + "Apellido: " + medico.getApellido() + "\n"
-					+ "Titulo: " + medico.getTitulo() + "\n"+ "Consulta: " + medico.getConsulta() + "\n" +
-					"Cedula: " + medico.getCedula() + "\n" + "Edad: " + medico.getEdad() + "\n");
+			System.out.println("Nombre: " + medico.getNombre() + "\n" 
+			+ "Apellido: " + medico.getApellido() + "\n"
+					+ "Titulo: " + medico.getTitulo() 
+					+ "\n" + "Hora Consulta: " + medico.getConsulta().getHora() 
+					+ "\n" + "NumConsulta: " + medico.getConsulta().getNumconsulta() + "\n" 
+					+ "\n" + "Nombre del Paciente: " + medico.getConsulta().getPaciente().getNombre()
+					+ "\n" + "Apellido del Paciente: " + medico.getConsulta().getPaciente().getApellido()
+					+ "Cedula: " + medico.getCedula() + "\n" 
+					+ "Edad: " + medico.getEdad() + "\n");
 
-			txtListado.append("Nombre: " + medico.getNombre() + "\n" + "Apellido: " + medico.getApellido() + "\n"
-					+ "Titulo: " + medico.getTitulo() + "\n"+ "Consulta: " + medico.getConsulta() + "\n" +
-					"Cedula: " + medico.getCedula() + "\n" + "Edad: " + medico.getEdad() + "\n");
+			txtListado.append("Nombre: " + medico.getNombre() + "\n" 
+			+ "Apellido: " + medico.getApellido() + "\n"
+					+ "Titulo: " + medico.getTitulo() 
+					+ "\n" + "Hora Consulta: " + medico.getConsulta().getHora() 
+					+ "\n" + "NumConsulta: " + medico.getConsulta().getNumconsulta() + "\n" 
+					+ "\n" + "Nombre del Paciente: " + medico.getConsulta().getPaciente().getNombre()
+					+ "\n" + "Apellido del Paciente: " + medico.getConsulta().getPaciente().getApellido()
+					+ "Cedula: " + medico.getCedula() + "\n" 
+					+ "Edad: " + medico.getEdad() + "\n");
 		}
 
 	} 

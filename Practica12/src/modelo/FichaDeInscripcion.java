@@ -5,12 +5,14 @@ import java.util.List;
 public class FichaDeInscripcion {
 
 	private Jugador jugador;
+	private Equipo equipo;
 	private int dorsal;
 	private String nacionalidad;
 
-	public FichaDeInscripcion(Jugador jugador, int dorsal, String nacionalidad) {
-
+	public FichaDeInscripcion(Jugador jugador, Equipo equipo, int dorsal, String nacionalidad) {
+		super();
 		this.jugador = jugador;
+		this.equipo = equipo;
 		this.dorsal = dorsal;
 		this.nacionalidad = nacionalidad;
 	}
@@ -21,6 +23,14 @@ public class FichaDeInscripcion {
 
 	public void setJugador(Jugador jugador) {
 		this.jugador = jugador;
+	}
+
+	public Equipo getEquipo() {
+		return equipo;
+	}
+
+	public void setEquipo(Equipo equipo) {
+		this.equipo = equipo;
 	}
 
 	public int getDorsal() {
@@ -37,15 +47,6 @@ public class FichaDeInscripcion {
 
 	public void setNacionalidad(String nacionalidad) {
 		this.nacionalidad = nacionalidad;
-	}
-	
-	public static List<FichaDeInscripcion> getTodos() {
-
-		return null;
-	}
-
-	public String toString() {
-		return "-" + jugador + "  "  + dorsal  ;
 	}
 
 }

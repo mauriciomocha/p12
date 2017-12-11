@@ -37,6 +37,8 @@ public class GestionPaciente {
 		
 	}
 	
+	
+	
 	public List<Medico> getMedicos(){
 		return medicos;
 	}
@@ -65,8 +67,25 @@ public class GestionPaciente {
 		
 	}
 	
+	
 	public List<Paciente> getPacientes(){
 		return pacientes;
+	}
+	
+	public boolean isCedulaValida(String cedula) throws Exception {
+
+		try {
+			int a= Integer.parseInt(cedula);
+			}catch(NumberFormatException e){
+				throw new Exception("Formato incorecto, cedula contiene caracteres");
+		}
+		if(cedula.length()!=10)
+			throw new Exception("La cedula debe de tener 10 digitos");
+			
+		
+		return true;
+		
+
 	}
 
 }

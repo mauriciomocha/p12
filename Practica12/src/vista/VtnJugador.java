@@ -15,6 +15,7 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -38,7 +39,7 @@ public class VtnJugador extends JInternalFrame implements ActionListener {
 		setClosable(true);
 		setMaximizable(false);
 		setMaximizable(true);
-		setSize(500, 400);
+		setSize(480, 400);
 
 		getContentPane().setLayout(new GridLayout(2, 1));
 		JPanel pnlTitulo = new JPanel(new FlowLayout());
@@ -49,10 +50,12 @@ public class VtnJugador extends JInternalFrame implements ActionListener {
 		JLabel edad = new JLabel("Edad: ");
 
 		txtnombre = new JTextField(15);
-		txtapellido = new JTextField(15);
+		txtapellido = new JTextField(14);
 		txtcedula = new JTextField(15);
 		txtedad = new JTextField(15);
-		txtListado = new JTextArea(14, 20);
+		txtListado = new JTextArea(7, 40);
+
+		JScrollPane txtBaja = new JScrollPane(txtListado);
 
 		JButton guardar = new JButton("Guardar");
 		guardar.addActionListener(this);
@@ -88,7 +91,7 @@ public class VtnJugador extends JInternalFrame implements ActionListener {
 		panel2.setBorder(BorderFactory.createTitledBorder("Listado"));
 		getContentPane().add(panel2);
 
-		panel2.add(txtListado);
+		panel2.add(txtBaja);
 		panel2.add(salir, BorderLayout.SOUTH);
 
 	}
@@ -140,9 +143,18 @@ public class VtnJugador extends JInternalFrame implements ActionListener {
 		String cedula = txtcedula.getText();
 		int edad = Integer.parseInt(txtedad.getText());
 
+		
+		try {
+			if(ge.isCedulaValida(cedula)) {
 		ge.agregarJugador(nombre, apellido, cedula, edad);
 		listar();
+			}
 
+		}catch (Exception e) {
+			JOptionPane.showMessageDialog(this, e.getMessage(),
+					"Mensaje de error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
 	}
 
 	private void listar() {

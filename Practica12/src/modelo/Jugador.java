@@ -16,7 +16,7 @@ public class Jugador extends Persona {
 	}
 
 	public String toString() {
-		return "-" + nombre + " " + apellido;
+		return "- " + nombre + " " + apellido;
 	}
 	
 }

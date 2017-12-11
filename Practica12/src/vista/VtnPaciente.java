@@ -19,8 +19,6 @@ import javax.swing.JTextField;
 import controlador.GestionPaciente;
 import modelo.Paciente;
 
-
-
 public class VtnPaciente extends JInternalFrame implements ActionListener {
 
 	private GestionPaciente gp;
@@ -38,7 +36,7 @@ public class VtnPaciente extends JInternalFrame implements ActionListener {
 		setClosable(true);
 		setMaximizable(false);
 		setMaximizable(true);
-		setSize(500, 400);
+		setSize(480, 400);
 
 		getContentPane().setLayout(new GridLayout(2, 1));
 		JPanel pnlTitulo = new JPanel(new FlowLayout());
@@ -52,7 +50,7 @@ public class VtnPaciente extends JInternalFrame implements ActionListener {
 		txtapellido = new JTextField(15);
 		txtcedula = new JTextField(15);
 		txtedad = new JTextField(15);
-		txtListado = new JTextArea(14, 20);
+		txtListado = new JTextArea(7, 40);
 
 		JButton guardar = new JButton("Guardar");
 		guardar.addActionListener(this);
@@ -131,18 +129,27 @@ public class VtnPaciente extends JInternalFrame implements ActionListener {
 		txtcedula.setText("");
 		txtedad.setText("");
 
-	}
-
+	}	
 	private void guardar() {
 
 		String nombre = txtnombre.getText();
 		String apellido = txtapellido.getText();
 		String cedula = txtcedula.getText();
 		int edad = Integer.parseInt(txtedad.getText());
-
+		
+	try {
+		
+		if(gp.isCedulaValida(cedula)) {
+			
 		gp.agregarPaciente(nombre, apellido, cedula, edad);
 		listar();
-
+		
+		}
+	}catch (Exception e) {
+		JOptionPane.showMessageDialog(this, e.getMessage(),
+				"Mensaje de error", JOptionPane.ERROR_MESSAGE);
+		e.printStackTrace();
+	}
 	}
 
 	private void listar() {
@@ -157,6 +164,6 @@ public class VtnPaciente extends JInternalFrame implements ActionListener {
 					+ "Cedula: " + paciente.getCedula() + "\n" + "Edad: " + paciente.getEdad() + "\n");
 		}
 
-	} 
+	}
 
 }

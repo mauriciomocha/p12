@@ -1,5 +1,7 @@
 package modelo;
 
+import java.util.List;
+
 public class Consulta {
 	private int hora;
 	private int numconsulta;
@@ -44,6 +46,15 @@ public class Consulta {
 
 	public void setPaciente(Paciente paciente) {
 		this.paciente = paciente;
+	}
+	
+	public static List<Consulta> getTodos() {
+
+		return null;
+	}
+
+	public String toString() {
+		return "- " + hora + " " + numconsulta + " " + paciente;
 	}
 
 }

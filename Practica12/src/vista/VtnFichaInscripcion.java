@@ -2,7 +2,6 @@ package vista;
 
 import java.awt.BorderLayout;
 
-
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -19,10 +18,12 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import controlador.GestionEquipo;
+import modelo.Equipo;
 import modelo.FichaDeInscripcion;
 import modelo.Jugador;
 
@@ -32,6 +33,7 @@ public class VtnFichaInscripcion extends JInternalFrame implements ActionListene
 	private JTextField txtdorsal;
 	private JTextField txtnacionalidad;
 	private JComboBox comJugador;
+	private JComboBox comEquipo;
 	private JTextArea txtListado;
 
 	public VtnFichaInscripcion(GestionEquipo ge) {
@@ -41,21 +43,26 @@ public class VtnFichaInscripcion extends JInternalFrame implements ActionListene
 		setClosable(true);
 		setMaximizable(false);
 		setMaximizable(true);
-		setSize(500, 400);
+		setSize(480, 400);
 
 		getContentPane().setLayout(new GridLayout(2, 1));
 		JPanel pnlTitulo = new JPanel(new FlowLayout());
 
 		comJugador = new JComboBox();
 		cargarVtnJugador();
+		comEquipo = new JComboBox();
+		cargarVtnEquipo();
 
 		JLabel jugador = new JLabel("Datos del jugador: ");
+		JLabel equipo = new JLabel("Datos del equipo");
 		JLabel dorsal = new JLabel("Dorsal del jugador: ");
-		JLabel nacionalidad = new JLabel("Nacionalidad: ");
+		JLabel nacionalidad = new JLabel("Nacionalidad del Equipo: ");
 
-		txtdorsal = new JTextField(15);
-		txtnacionalidad = new JTextField(15);
-		txtListado = new JTextArea(14, 20);
+		txtdorsal = new JTextField(28);
+		txtnacionalidad = new JTextField(27);
+		txtListado = new JTextArea(7, 40);
+
+		JScrollPane baja = new JScrollPane(txtListado);
 
 		JButton guardar = new JButton("Guardar");
 		guardar.addActionListener(this);
@@ -76,11 +83,14 @@ public class VtnFichaInscripcion extends JInternalFrame implements ActionListene
 
 		panel1.add(jugador);
 		panel1.add(comJugador);
+		panel1.add(equipo);
+		panel1.add(comEquipo);
 
-		panel1.add(dorsal);
 		panel1.add(txtdorsal);
-		panel1.add(nacionalidad);
+		panel1.add(dorsal);
+
 		panel1.add(txtnacionalidad);
+		panel1.add(nacionalidad);
 
 		panel1.add(guardar, BorderLayout.SOUTH);
 		panel1.add(borrar, BorderLayout.SOUTH);
@@ -90,7 +100,7 @@ public class VtnFichaInscripcion extends JInternalFrame implements ActionListene
 		panel2.setBorder(BorderFactory.createTitledBorder("Listado"));
 		getContentPane().add(panel2);
 
-		panel2.add(txtListado);
+		panel2.add(baja);
 		panel2.add(salir, BorderLayout.SOUTH);
 
 	}
@@ -104,6 +114,18 @@ public class VtnFichaInscripcion extends JInternalFrame implements ActionListene
 			model.addElement(Jugador);
 		}
 		comJugador = new JComboBox(model);
+
+	}
+
+	private void cargarVtnEquipo() {
+		Vector model = new Vector();
+		List<Equipo> equipos = ge.getEquipos();
+
+		for (int i = 0; i < equipos.size(); i++) {
+			Equipo Equipo = equipos.get(i);
+			model.addElement(Equipo);
+		}
+		comEquipo = new JComboBox(model);
 
 	}
 
@@ -150,8 +172,9 @@ public class VtnFichaInscripcion extends JInternalFrame implements ActionListene
 		String nacionalidad = txtnacionalidad.getText();
 		int dorsal = Integer.parseInt(txtdorsal.getText());
 		Jugador jugador = (Jugador) comJugador.getSelectedItem();
+		Equipo equipo = (Equipo) comEquipo.getSelectedItem();
 
-		ge.agregarFichaDeInscripcion(jugador, dorsal, nacionalidad);
+		ge.agregarFichaDeInscripcion(jugador, equipo, dorsal, nacionalidad);
 		listar();
 
 	}
@@ -161,13 +184,15 @@ public class VtnFichaInscripcion extends JInternalFrame implements ActionListene
 		txtListado.setText("");
 		for (int i = 0; i < fichaDeInscripciones.size(); i++) {
 			FichaDeInscripcion fichaDeInscripcion = fichaDeInscripciones.get(i);
-			System.out.println(
-					"Jugador: " + fichaDeInscripcion.getJugador() + "\n" + "Dorsal: " + fichaDeInscripcion.getDorsal()
-							+ "\n" + "Nacionalidad: " + fichaDeInscripcion.getNacionalidad() + "\n");
+			System.out.println("Nombre del Jugador: " + fichaDeInscripcion.getJugador().getNombre() + "\n"
+					+ "Apellido del Jugador: " + fichaDeInscripcion.getJugador().getApellido() + "\n" + "Dorsal: "
+					+ fichaDeInscripcion.getDorsal() + "\n" + "Nacionalidad: " + fichaDeInscripcion.getNacionalidad()
+					+ "\n");
 
-			txtListado.append(
-					"Jugador: " + fichaDeInscripcion.getJugador() + "\n" + "Dorsal: " + fichaDeInscripcion.getDorsal()
-							+ "\n" + "Nacionalidad: " + fichaDeInscripcion.getNacionalidad() + "\n");
+			txtListado.append("Nombre del Jugador: " + fichaDeInscripcion.getJugador().getNombre() + "\n"
+					+ "Apellido del Jugador: " + fichaDeInscripcion.getJugador().getApellido() + "\n" + "Dorsal: "
+					+ fichaDeInscripcion.getDorsal() + "\n" + "Nacionalidad: " + fichaDeInscripcion.getNacionalidad()
+					+ "\n");
 		}
 
 	}

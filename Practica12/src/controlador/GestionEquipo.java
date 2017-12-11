@@ -12,7 +12,7 @@ public class GestionEquipo {
 	
 	private List<Equipo> equipos;
 	private List<FichaDeInscripcion> fichaDeInscripciones;
-	private List<Jugador> jugadores;
+	private List<Jugador>jugadores;
 	
 	
 
@@ -25,9 +25,9 @@ public class GestionEquipo {
 
 	}
 
-	public void agregarEquipo(FichaDeInscripcion fichaDeInscripcion,String nombreEquipo,int cantidadJugadores) {
-		Equipo e = new Equipo(fichaDeInscripcion, nombreEquipo, cantidadJugadores);
-		e.setFichaDeInscripcion(fichaDeInscripcion);
+	public void agregarEquipo(Jugador jugador,String nombreEquipo,int cantidadJugadores) {
+		Equipo e = new Equipo(jugador, nombreEquipo, cantidadJugadores);
+		e.setJugador(jugador);
 		e.setNombreEquipo(nombreEquipo);
 		e.setCantidadJugadores(cantidadJugadores);
 		
@@ -40,9 +40,10 @@ public class GestionEquipo {
 
 	}
 	
-	public void agregarFichaDeInscripcion(Jugador jugador, int dorsal, String nacionalidad) {
-		FichaDeInscripcion f=new FichaDeInscripcion(jugador,dorsal,nacionalidad);
+	public void agregarFichaDeInscripcion(Jugador jugador, Equipo equipo, int dorsal, String nacionalidad) {
+		FichaDeInscripcion f=new FichaDeInscripcion(jugador,equipo,dorsal,nacionalidad);
 		f.setJugador(jugador);
+		f.setEquipo(equipo);
 		f.setDorsal(dorsal);
 		f.setNacionalidad(nacionalidad);
 		
@@ -66,7 +67,21 @@ public class GestionEquipo {
 		
 		
 	}
-	
+	public boolean isCedulaValida(String cedula) throws Exception {
+
+		try {
+			int a= Integer.parseInt(cedula);
+			}catch(NumberFormatException e){
+				throw new Exception("Formato incorecto, cedula contiene caracteres");
+		}
+		if(cedula.length()!=10)
+			throw new Exception("La cedula debe de tener 10 digitos");
+			
+		
+		return true;
+		
+
+	}
 	public List<Jugador> getJugadores(){
 		return jugadores;
 
