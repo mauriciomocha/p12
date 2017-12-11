@@ -19,7 +19,7 @@ import javax.swing.JTextField;
 
 import controlador.GestionEmpresa;
 
-public class VntDepartamento extends JInternalFrame implements ActionListener{
+public class VtnDepartamento extends JInternalFrame implements ActionListener{
 	private JTextField txtNombre;
 	private JTextField txtEmpleado;
 	private JTextArea txtListado;
@@ -35,7 +35,7 @@ public class VntDepartamento extends JInternalFrame implements ActionListener{
 
 	}
 
-	public VntDepartamento(GestionEmpresa ge) {
+	public VtnDepartamento(GestionEmpresa ge) {
 		this.ge = ge;
 		initComponets();
 		setSize(369, 335);

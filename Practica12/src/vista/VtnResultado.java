@@ -17,19 +17,17 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import controlador.GestionEmpresa;
+import controlador.GestionCompetencia;
 
-public class VntEmpleado extends JInternalFrame implements ActionListener{
-	private JTextField txtNombre;
-	private JTextField txtApellido;
-	private JTextField txtCedula;
-	private JTextField txtEdad;
+public class VtnResultado extends JInternalFrame implements ActionListener{
+	private JTextField txtPuesto;
+	private JTextField txtAtleta;
 	private JTextArea txtListado;
 
-	private GestionEmpresa ge;
+	private GestionCompetencia gc;
 
 	private void initComponets() {
-		setTitle("Ventana Empresa");
+		setTitle("Ventana Resultado");
 		setSize(300, 400);
 		setClosable(true);
 		setMaximizable(false);
@@ -37,27 +35,19 @@ public class VntEmpleado extends JInternalFrame implements ActionListener{
 
 	}
 
-	public VntEmpleado(GestionEmpresa ge) {
-		this.ge = ge;
+	public VtnResultado(GestionCompetencia gc) {
+		this.gc = gc;
 		initComponets();
 		setSize(369, 335);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(new GridLayout(2, 1));
 
-		JLabel etiqueta1 = new JLabel("Nombre: ");
-		JLabel etiqueta2 = new JLabel("Apellido: ");
-		JLabel etiqueta3 = new JLabel("Cedula: ");
-		JLabel etiqueta4 = new JLabel("Eduad: ");
+		JLabel etiqueta1 = new JLabel("Puesto: ");
+		JLabel etiqueta2 = new JLabel("Atleta: ");
+
 		
-		
-		
-		
-		
-		txtNombre=new JTextField(20);
-		txtApellido = new JTextField(20);
-		txtCedula=new JTextField(20);
-		txtEdad = new JTextField(20);
-	
+		txtPuesto=new JTextField(20);
+		txtAtleta = new JTextField(20);
 		txtListado = new JTextArea(5, 20);
 		
 		JButton boton1 = new JButton("Anadir");
@@ -77,13 +67,10 @@ public class VntEmpleado extends JInternalFrame implements ActionListener{
 		panel1.setBorder(BorderFactory.createTitledBorder("Datos Empresa"));
 		getContentPane().add(panel1);
 		panel1.add(etiqueta1);
-		panel1.add(txtNombre);
+		panel1.add(txtPuesto);
 		panel1.add(etiqueta2);
-		panel1.add(txtApellido);
-		panel1.add(etiqueta3);
-		panel1.add(txtCedula);
-		panel1.add(etiqueta4);
-		panel1.add(txtEdad);
+		panel1.add(txtAtleta);
+
 	
 
 		panel1.add(boton1, BorderLayout.SOUTH);
@@ -99,7 +86,7 @@ public class VntEmpleado extends JInternalFrame implements ActionListener{
 		panel2.add(boton3, BorderLayout.CENTER);
 
 
-		ge = new GestionEmpresa();
+		gc = new GestionCompetencia();
 
 		String nombre = JOptionPane.showInputDialog(this, "Introducir Nombre:");
 		if (nombre != null) {
@@ -139,10 +126,9 @@ public class VntEmpleado extends JInternalFrame implements ActionListener{
 
 	
 	/*public void guardar(){
-		String nombre = txtNombre.getText();
-		String apellido= txtApellido.getText();
-		String cedula=txtCedula.getText();
-    	String edad=txtEdad.getText();
+		String puesto = txtPuesto.getText();
+		String atleta= txtAtleta.getText();
+	
 		
 	//	ge.
 	//	JOptionPane.showMessageDialog(this, "Datos guardados", 
@@ -167,11 +153,9 @@ public class VntEmpleado extends JInternalFrame implements ActionListener{
 	}
 
 	public void vaciar() {
-		txtNombre.setText("");
-		txtApellido.setText("");
-		txtCedula.setText("");
-		txtEdad.setText("");
-	
+		txtPuesto.setText("");
+		txtAtleta.setText("");
+
 
 	}
 
