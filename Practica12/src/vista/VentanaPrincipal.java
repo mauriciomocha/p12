@@ -26,8 +26,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		initComponets();
 		ge = new GestionEquipo();
 		gp=new GestionPaciente();
-  
-//
+
 	}
 
 	private void initComponets() {
@@ -68,17 +67,17 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 
 		// tablas....equipo
 
-		JMenuItem tblJugador = new JMenuItem("Tabla del Jugador");
+		JMenuItem tblJugador = new JMenuItem("Tabla  Jugador");
 		tblJugador.addActionListener(this);
 		tblJugador.setActionCommand("tblJugador");
 		menuEquipo.add(tblJugador);
 
-		JMenuItem tblEquipo = new JMenuItem("Tabla del Equipo");
+		JMenuItem tblEquipo = new JMenuItem("Tabla  Equipo");
 		tblEquipo.addActionListener(this);
 		tblEquipo.setActionCommand("tblEquipo");
 		menuEquipo.add(tblEquipo);
 
-		JMenuItem tblFichaInscripcion = new JMenuItem("Tabla de la Ficha de Inscripcin");
+		JMenuItem tblFichaInscripcion = new JMenuItem("Tabla  Ficha de Inscripcin");
 		tblFichaInscripcion.addActionListener(this);
 		tblFichaInscripcion.setActionCommand("tblFichaInscripcion");
 		menuEquipo.add(tblFichaInscripcion);

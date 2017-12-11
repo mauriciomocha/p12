@@ -55,9 +55,9 @@ public class VtnConsulta  extends JInternalFrame implements ActionListener {
 		JLabel costoConsulta = new JLabel("Costo Consulta: ");
 		JLabel paciente=new JLabel("Paciente: ");
 
-		txthora = new JTextField(15);
-		txtnumConsulta = new JTextField(15);
-		txtcostoConsulta = new JTextField(15);
+		txthora = new JTextField(12);
+		txtnumConsulta = new JTextField(12);
+		txtcostoConsulta = new JTextField(17);
 		txtListado = new JTextArea(7, 40);
 
 		JScrollPane baja = new JScrollPane(txtListado);
