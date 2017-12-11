@@ -48,14 +48,15 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		JMenuBar barra = new JMenuBar();
 
 		
-		
+		//aqui ponga el menu segun su orden......yo por ejemplo soy el ultimo y puse vtn 25 en 
+		//adelante xq son 12 ventanas por cabeza ...agan cuenta con las ventanas de las tablas....
 		JMenu menuEquipo = new JMenu("Equipo");
 		JMenu menuPaciente = new JMenu("Paciente");
 		JMenu menuSalir = new JMenu("Salir");
 		
 		
 		
-		
+		//aki ponga su subventanas...en el mismo menu ponga las ventans de las tablas...
 		JMenuItem jugadores = new JMenuItem("Datos del Jugador");
 		jugadores.addActionListener(this);
 		jugadores.setActionCommand("Jugador");
@@ -151,24 +152,24 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 
 
 	private void jugadores() {
-		VtnJugador vtn1 = new VtnJugador(this.ge);
-		vtn1.setVisible(true);
-		escritorio.add(vtn1);
+		VtnJugador vtn25 = new VtnJugador(this.ge);
+		vtn25.setVisible(true);
+		escritorio.add(vtn25);
 
 		try {
-			vtn1.setSelected(true);
+			vtn25.setSelected(true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 	}
 	private void equipos() {
-		VtnEquipo vtn2 = new VtnEquipo(this.ge);
-		vtn2.setVisible(true);
-		escritorio.add(vtn2);
+		VtnEquipo vtn26 = new VtnEquipo(this.ge);
+		vtn26.setVisible(true);
+		escritorio.add(vtn26);
 
 		try {
-			vtn2.setSelected(true);
+			vtn26.setSelected(true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -176,12 +177,12 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 	}
 	
 	private void fichaInscripcion() {
-		VtnFichaInscripcion vtn3 = new VtnFichaInscripcion(this.ge);
-		vtn3.setVisible(true);
-		escritorio.add(vtn3);
+		VtnFichaInscripcion vtn27 = new VtnFichaInscripcion(this.ge);
+		vtn27.setVisible(true);
+		escritorio.add(vtn27);
 
 		try {
-			vtn3.setSelected(true);
+			vtn27.setSelected(true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -190,12 +191,12 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 	}
 	
 	private void pacientes() {
-		VtnPaciente vtn4 = new VtnPaciente(this.gp);
-		vtn4.setVisible(true);
-		escritorio.add(vtn4);
+		VtnPaciente vtn31 = new VtnPaciente(this.gp);
+		vtn31.setVisible(true);
+		escritorio.add(vtn31);
 
 		try {
-			vtn4.setSelected(true);
+			vtn31.setSelected(true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -204,12 +205,12 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 	
 
 	private void consultas() {
-		VtnConsulta vtn5 = new VtnConsulta(this.gp);
-		vtn5.setVisible(true);
-		escritorio.add(vtn5);
+		VtnConsulta vtn32 = new VtnConsulta(this.gp);
+		vtn32.setVisible(true);
+		escritorio.add(vtn32);
 
 		try {
-			vtn5.setSelected(true);
+			vtn32.setSelected(true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -217,12 +218,12 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 	}
 	
 	private void medicos() {
-		VtnMedico vtn6 = new VtnMedico(this.gp);
-		vtn6.setVisible(true);
-		escritorio.add(vtn6);
+		VtnMedico vtn33 = new VtnMedico(this.gp);
+		vtn33.setVisible(true);
+		escritorio.add(vtn33);
 
 		try {
-			vtn6.setSelected(true);
+			vtn33.setSelected(true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
