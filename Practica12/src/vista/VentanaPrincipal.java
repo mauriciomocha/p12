@@ -26,7 +26,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		initComponets();
 		ge = new GestionEquipo();
 		gp=new GestionPaciente();
-
+  
 //
 	}
 
