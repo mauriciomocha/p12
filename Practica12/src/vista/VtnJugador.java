@@ -6,8 +6,6 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-import java.util.Locale;
-import java.util.ResourceBundle;
 import java.util.Vector;
 
 import javax.swing.BorderFactory;
@@ -21,21 +19,22 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import controlador.GestionEquipo;
-import modelo.Equipo;
-import modelo.FichaDeInscripcion;
+import modelo.Jugador;
 
-public class VtnEquipo extends JInternalFrame implements ActionListener {
+public class VtnJugador extends JInternalFrame implements ActionListener {
+
 	private GestionEquipo ge;
 
-	private JTextField txtnombreEquipo;
-	private JTextField txtcatindadJugador;
-	private JComboBox comFichaIscripcion;
+	private JTextField txtnombre;
+	private JTextField txtapellido;
+	private JTextField txtcedula;
+	private JTextField txtedad;
 	private JTextArea txtListado;
 
-	public VtnEquipo(GestionEquipo ge) {
+	public VtnJugador(GestionEquipo ge) {
 
 		this.ge = ge;
-		setTitle("Equipo");
+		setTitle("Datos del Jugador");
 		setClosable(true);
 		setMaximizable(false);
 		setMaximizable(true);
@@ -44,15 +43,15 @@ public class VtnEquipo extends JInternalFrame implements ActionListener {
 		getContentPane().setLayout(new GridLayout(2, 1));
 		JPanel pnlTitulo = new JPanel(new FlowLayout());
 
-		comFichaIscripcion = new JComboBox();
-		cargarVtnFichaInscripcion();
+		JLabel nombre = new JLabel("Nombre: ");
+		JLabel apellido = new JLabel("Apellido: ");
+		JLabel cedula = new JLabel("Cedula: ");
+		JLabel edad = new JLabel("Edad: ");
 
-		JLabel fichaDeInscripcion = new JLabel("Ficha de Inscripcion: ");
-		JLabel nombreEquipo = new JLabel("Nombre del Equipo: ");
-		JLabel cantidadJugadores = new JLabel("Cantidad de Jugadores: ");
-
-		txtnombreEquipo = new JTextField(15);
-		txtcatindadJugador = new JTextField(15);
+		txtnombre = new JTextField(15);
+		txtapellido = new JTextField(15);
+		txtcedula = new JTextField(15);
+		txtedad = new JTextField(15);
 		txtListado = new JTextArea(14, 20);
 
 		JButton guardar = new JButton("Guardar");
@@ -69,16 +68,17 @@ public class VtnEquipo extends JInternalFrame implements ActionListener {
 
 		JPanel panel1 = new JPanel();
 		panel1.setLayout(new FlowLayout());
-		panel1.setBorder(BorderFactory.createTitledBorder("Datos Del Equipo"));
+		panel1.setBorder(BorderFactory.createTitledBorder("Datos del Jugador"));
 		getContentPane().add(panel1);
 
-		panel1.add(fichaDeInscripcion);
-		panel1.add(comFichaIscripcion);
-
-		panel1.add(nombreEquipo);
-		panel1.add(txtnombreEquipo);
-		panel1.add(cantidadJugadores);
-		panel1.add(txtcatindadJugador);
+		panel1.add(nombre);
+		panel1.add(txtnombre);
+		panel1.add(apellido);
+		panel1.add(txtapellido);
+		panel1.add(cedula);
+		panel1.add(txtcedula);
+		panel1.add(edad);
+		panel1.add(txtedad);
 
 		panel1.add(guardar, BorderLayout.SOUTH);
 		panel1.add(borrar, BorderLayout.SOUTH);
@@ -90,18 +90,6 @@ public class VtnEquipo extends JInternalFrame implements ActionListener {
 
 		panel2.add(txtListado);
 		panel2.add(salir, BorderLayout.SOUTH);
-
-	}
-
-	private void cargarVtnFichaInscripcion() {
-		Vector model = new Vector();
-		List<FichaDeInscripcion> fichaDeInscripciones = ge.getFichaDeInscripciones();
-
-		for (int i = 0; i < fichaDeInscripciones.size(); i++) {
-			FichaDeInscripcion FichaDeInscripcion = fichaDeInscripciones.get(i);
-			model.addElement(FichaDeInscripcion);
-		}
-		comFichaIscripcion = new JComboBox(model);
 
 	}
 
@@ -138,34 +126,35 @@ public class VtnEquipo extends JInternalFrame implements ActionListener {
 	}
 
 	private void borrar() {
-		txtcatindadJugador.setText("");
-		txtnombreEquipo.setText("");
+		txtnombre.setText("");
+		txtapellido.setText("");
+		txtcedula.setText("");
+		txtedad.setText("");
 
 	}
 
 	private void guardar() {
 
-		String nombreEquipo = txtnombreEquipo.getText();
-		int cantidadJugador = Integer.parseInt(txtcatindadJugador.getText());
-		FichaDeInscripcion fichaDeInscripcion = (FichaDeInscripcion) comFichaIscripcion.getSelectedItem();
+		String nombre = txtnombre.getText();
+		String apellido = txtapellido.getText();
+		String cedula = txtcedula.getText();
+		int edad = Integer.parseInt(txtedad.getText());
 
-		ge.agregarEquipo(fichaDeInscripcion, nombreEquipo, cantidadJugador);
+		ge.agregarJugador(nombre, apellido, cedula, edad);
 		listar();
 
 	}
 
 	private void listar() {
-		List<Equipo> equipos = ge.getEquipos();
+		List<Jugador> jugadores = ge.getJugadores();
 		txtListado.setText("");
-		for (int i = 0; i < equipos.size(); i++) {
-			Equipo equipo = equipos.get(i);
-			System.out.println("Ficha de Inscripcion: " + equipo.getFichaDeInscripcion() + "\n" + "Nombre del Equipo: "
-					+ equipo.getNombreEquipo() + "\n" + "Cantidad de Jugadores: " + equipo.getCantidadJugadores()
-					+ "\n");
+		for (int i = 0; i < jugadores.size(); i++) {
+			Jugador jugador = jugadores.get(i);
+			System.out.println("Nombre: " + jugador.getNombre() + "\n" + "Apellido: " + jugador.getApellido() + "\n"
+					+ "Cedula: " + jugador.getCedula() + "\n" + "Edad: " + jugador.getEdad() + "\n");
 
-			txtListado.append("Ficha de Inscripcion: " + equipo.getFichaDeInscripcion() + "\n" + "Nombre del Equipo: "
-					+ equipo.getNombreEquipo() + "\n" + "Cantidad de Jugadores: " + equipo.getCantidadJugadores()
-					+ "\n");
+			txtListado.append("Nombre: " + jugador.getNombre() + "\n" + "Apellido: " + jugador.getApellido() + "\n"
+					+ "Cedula: " + jugador.getCedula() + "\n" + "Edad: " + jugador.getEdad() + "\n");
 		}
 
 	}

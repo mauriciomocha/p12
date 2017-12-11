@@ -1,5 +1,7 @@
 package modelo;
 
+import java.util.List;
+
 public class FichaDeInscripcion {
 
 	private Jugador jugador;
@@ -35,6 +37,15 @@ public class FichaDeInscripcion {
 
 	public void setNacionalidad(String nacionalidad) {
 		this.nacionalidad = nacionalidad;
+	}
+	
+	public static List<FichaDeInscripcion> getTodos() {
+
+		return null;
+	}
+
+	public String toString() {
+		return "-" + jugador + "  "  + dorsal  ;
 	}
 
 }

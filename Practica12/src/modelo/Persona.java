@@ -2,8 +2,8 @@ package modelo;
 
 public class Persona {
 
-	private String nombre;
-	private String apellido;
+	protected String nombre;
+	protected String apellido;
 	private String cedula;
 	private int edad;
 
