@@ -37,6 +37,9 @@ public class Equipo {
 	public void setCantidadJugadores(int cantidadJugadores) {
 		this.cantidadJugadores = cantidadJugadores;
 	}
+	
+	
+	
 
 	public static List<Equipo> getTodos() {
 

@@ -1,11 +1,15 @@
 package controlador;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import modelo.Equipo;
 import modelo.FichaDeInscripcion;
 import modelo.Jugador;
+import modelo.Persona;
 
 public class GestionEquipo {
 
@@ -86,6 +90,29 @@ public class GestionEquipo {
 		return jugadores;
 
 		
+	}
+	
+	
+	
+	
+	
+	private String pathEquipos= "archivos/equipos.txt";
+
+	public void guardarEquipo(Equipo e) {
+		try {
+			FileWriter file = new FileWriter(pathEquipos, true);
+			BufferedWriter out = new BufferedWriter(file);
+			String registro = "Nombre Jugador: " +e.getJugador().getNombre()+";" +"\n"
+			+ "Apellido Jugador: "+ e.getJugador().getApellido()+"\n"
+			+ "Nombre del Equipo: " + e.getNombreEquipo()+";" +"\n"
+			+ " Cantidad de Jugadores: " + e.getCantidadJugadores() +"\n";
+			out.append(registro + "\n");
+			out.close();
+			file.close();
+		} catch (IOException i) {
+			
+			i.printStackTrace();
+		}
 	}
 	
 }
