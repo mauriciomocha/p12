@@ -15,14 +15,18 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import controlador.GestionEquipo;
 import controlador.GestionPaciente;
 import modelo.Consulta;
+import modelo.Equipo;
+import modelo.Jugador;
 import modelo.Paciente;
 
-public class VtnConsulta extends JInternalFrame implements ActionListener {
+public class VtnConsulta  extends JInternalFrame implements ActionListener {
 	private GestionPaciente gp;
 
 	private JTextField txthora;
@@ -31,14 +35,14 @@ public class VtnConsulta extends JInternalFrame implements ActionListener {
 	private JComboBox comPaciente;
 	private JTextArea txtListado;
 
-	public VtnConsulta(GestionPaciente gp) {
+	public VtnConsulta (GestionPaciente gp) {
 
 		this.gp = gp;
-		setTitle("Consulta");
+		setTitle("Paciente");
 		setClosable(true);
 		setMaximizable(false);
 		setMaximizable(true);
-		setSize(500, 400);
+		setSize(480, 400);
 
 		getContentPane().setLayout(new GridLayout(2, 1));
 		JPanel pnlTitulo = new JPanel(new FlowLayout());
@@ -47,14 +51,16 @@ public class VtnConsulta extends JInternalFrame implements ActionListener {
 		cargarVtnPaciente();
 
 		JLabel hora = new JLabel("Hora: ");
-		JLabel numConsulta = new JLabel("Numero de Consulta: ");
-		JLabel CostoConsulta = new JLabel("Consto de la Consulta: ");
-		JLabel paciente = new JLabel("Paciente: ");
+		JLabel numConsulta = new JLabel("Num Consulta: ");
+		JLabel costoConsulta = new JLabel("Costo Consulta: ");
+		JLabel paciente=new JLabel("Paciente: ");
 
 		txthora = new JTextField(15);
 		txtnumConsulta = new JTextField(15);
 		txtcostoConsulta = new JTextField(15);
-		txtListado = new JTextArea(14, 20);
+		txtListado = new JTextArea(7, 40);
+
+		JScrollPane baja = new JScrollPane(txtListado);
 
 		JButton guardar = new JButton("Guardar");
 		guardar.addActionListener(this);
@@ -70,15 +76,14 @@ public class VtnConsulta extends JInternalFrame implements ActionListener {
 
 		JPanel panel1 = new JPanel();
 		panel1.setLayout(new FlowLayout());
-		panel1.setBorder(BorderFactory.createTitledBorder("Datos de la Consulta"));
+		panel1.setBorder(BorderFactory.createTitledBorder("Datos De la Consulta"));
 		getContentPane().add(panel1);
 
 		panel1.add(hora);
 		panel1.add(txthora);
 		panel1.add(numConsulta);
 		panel1.add(txtnumConsulta);
-
-		panel1.add(CostoConsulta);
+		panel1.add(costoConsulta);
 		panel1.add(txtcostoConsulta);
 		panel1.add(paciente);
 		panel1.add(comPaciente);
@@ -86,15 +91,18 @@ public class VtnConsulta extends JInternalFrame implements ActionListener {
 		panel1.add(guardar, BorderLayout.SOUTH);
 		panel1.add(borrar, BorderLayout.SOUTH);
 
+		
+		
 		JPanel panel2 = new JPanel();
 		panel2.setLayout(new FlowLayout());
 		panel2.setBorder(BorderFactory.createTitledBorder("Listado"));
 		getContentPane().add(panel2);
 
-		panel2.add(txtListado);
+		panel2.add(baja);
 		panel2.add(salir, BorderLayout.SOUTH);
 
 	}
+
 	private void cargarVtnPaciente() {
 		Vector model = new Vector();
 		List<Paciente> pacientes = gp.getPacientes();
@@ -141,36 +149,41 @@ public class VtnConsulta extends JInternalFrame implements ActionListener {
 
 	private void borrar() {
 		txthora.setText("");
-		txtcostoConsulta.setText("");
 		txtnumConsulta.setText("");
+		txtcostoConsulta.setText("");
+		
+
 	}
 
 	private void guardar() {
 
 		int hora = Integer.parseInt(txthora.getText());
 		int numconsulta = Integer.parseInt(txtnumConsulta.getText());
-		int costoConsulta = Integer.parseInt(txtcostoConsulta.getText());
+		int costoConsulta=Integer.parseInt(txtnumConsulta.getText());
 		Paciente paciente = (Paciente) comPaciente.getSelectedItem();
 
-		gp.agregarConsulta(hora, numconsulta, costoConsulta, paciente);
+		gp.agregarConsulta( hora,  numconsulta,  costoConsulta,  paciente);
 		listar();
 
 	}
 
 	private void listar() {
-		List<Consulta>  consultas = gp.getConsultas();
+		List<Consulta> consultas = gp.getConsultas();
 		txtListado.setText("");
 		for (int i = 0; i < consultas.size(); i++) {
 			Consulta consulta = consultas.get(i);
-			System.out.println("Hora: " + consulta.getHora() + "\n" + "Numero de la Consulta: "
-					+ consulta.getNumconsulta() + "\n" + "Costo de la Consulta: " + consulta.getCostoConsulta() + "\n"
-					+ "\n" + "Nombre del Paciente: " + consulta.getPaciente().getNombre() + "\n" + "\n"
-					+ "Apellido del Paciente: " + consulta.getPaciente().getApellido() + "\n");
+		
+			System.out.println("Hora: " + consulta.getHora()+ "\n"
+					+ "numConsulta: " + consulta.getNumconsulta() + "\n"
+					+ "Costo Consulta: " + consulta.getCostoConsulta() + "\n"
+					+ "Nombre del Paciente: " + consulta.getPaciente().getNombre() + "\n"
+					+ "Apellido de Paciente: " + consulta.getPaciente().getApellido() + "\n");
 
-			txtListado.append("Hora: " + consulta.getHora() + "\n" + "Numero de la Consulta: "
-					+ consulta.getNumconsulta() + "\n" + "Costo de la Consulta: " + consulta.getCostoConsulta() + "\n"
-					+ "\n" + "Nombre del Paciente: " + consulta.getPaciente().getNombre() + "\n" + "\n"
-					+ "Apellido del Paciente: " + consulta.getPaciente().getApellido() + "\n");
+			txtListado.append("Hora: " + consulta.getHora()+ "\n"
+					+ "numConsulta: " + consulta.getNumconsulta() + "\n"
+					+ "Costo Consulta: " + consulta.getCostoConsulta() + "\n"
+					+ "Nombre del Paciente: " + consulta.getPaciente().getNombre() + "\n"
+					+ "Apellido de Paciente: " + consulta.getPaciente().getApellido() + "\n");
 		}
 
 	}
