@@ -5,7 +5,6 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -18,20 +17,19 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import controlador.GestionCompetencia;
 
-import controlador.GestionEmpresa;
-
-
-public class VntEmpresa extends JInternalFrame implements ActionListener {
+public class VtnAtleta extends JInternalFrame implements ActionListener{
 	private JTextField txtNombre;
-	private JTextField txtDireccion;
-	private JTextField txtDepartamento;
+	private JTextField txtApellido;
+	private JTextField txtCedula;
+	private JTextField txtEdad;
 	private JTextArea txtListado;
 
-	private GestionEmpresa ge;
+	private GestionCompetencia gc;
 
 	private void initComponets() {
-		setTitle("Ventana Empresa");
+		setTitle("Ventana Atleta");
 		setSize(300, 400);
 		setClosable(true);
 		setMaximizable(false);
@@ -39,24 +37,22 @@ public class VntEmpresa extends JInternalFrame implements ActionListener {
 
 	}
 
-	public VntEmpresa(GestionEmpresa ge) {
-		this.ge = ge;
+	public VtnAtleta(GestionCompetencia gc) {
+		this.gc = gc;
 		initComponets();
 		setSize(369, 335);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(new GridLayout(2, 1));
 
-		JLabel etiqueta1 = new JLabel("Nombre Empresa: ");
-		JLabel etiqueta2 = new JLabel("Direccion: ");
-		JLabel etiqueta3 = new JLabel("Departamento: ");
-		
-		
-		
-		
+		JLabel etiqueta1 = new JLabel("Nombre: ");
+		JLabel etiqueta2 = new JLabel("Apellido: ");
+		JLabel etiqueta3 = new JLabel("Cedula: ");
+		JLabel etiqueta4= new JLabel("Edad: ");
 		
 		txtNombre=new JTextField(20);
-		txtDireccion = new JTextField(20);
-	
+		txtApellido = new JTextField(20);
+		txtCedula=new JTextField(20);
+		txtEdad=new JTextField(20);
 		txtListado = new JTextArea(5, 20);
 		
 		JButton boton1 = new JButton("Anadir");
@@ -78,9 +74,11 @@ public class VntEmpresa extends JInternalFrame implements ActionListener {
 		panel1.add(etiqueta1);
 		panel1.add(txtNombre);
 		panel1.add(etiqueta2);
-		panel1.add(txtDireccion);
+		panel1.add(txtApellido);
 		panel1.add(etiqueta3);
-		panel1.add(txtDepartamento);
+		panel1.add(txtCedula);
+		panel1.add(etiqueta4);
+		panel1.add(txtEdad);
 	
 
 		panel1.add(boton1, BorderLayout.SOUTH);
@@ -96,7 +94,7 @@ public class VntEmpresa extends JInternalFrame implements ActionListener {
 		panel2.add(boton3, BorderLayout.CENTER);
 
 
-		ge = new GestionEmpresa();
+		gc = new GestionCompetencia();
 
 		String nombre = JOptionPane.showInputDialog(this, "Introducir Nombre:");
 		if (nombre != null) {
@@ -137,8 +135,9 @@ public class VntEmpresa extends JInternalFrame implements ActionListener {
 	
 	/*public void guardar(){
 		String nombre = txtNombre.getText();
-		String direccion= txtDireccion.getText();
-		String departamento=txtDepartamento.getText();
+		String apellido= txtApellido.getText();
+		String cedula=txtCedula.getText();
+		String edad=txtEdad.getText();
 		
 	//	ge.
 	//	JOptionPane.showMessageDialog(this, "Datos guardados", 
@@ -164,11 +163,11 @@ public class VntEmpresa extends JInternalFrame implements ActionListener {
 
 	public void vaciar() {
 		txtNombre.setText("");
-		txtDireccion.setText("");
-		txtDepartamento.setText("");
+		txtApellido.setText("");
+		txtCedula.setText("");
+		txtEdad.setText("");
 	
 
 	}
-
 
 }
