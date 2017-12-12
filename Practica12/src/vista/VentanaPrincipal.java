@@ -15,17 +15,32 @@ import javax.swing.JMenuItem;
 
 import controlador.GestionEquipo;
 import controlador.GestionPaciente;
+<<<<<<< HEAD
+=======
+import controlador.GestionPais;
+import controlador.GestionRevista;
+>>>>>>> branch 'master' of https://github.com/ChristianMocha/p12.git
 
 public class VentanaPrincipal extends JFrame implements ActionListener {
 
 	private JDesktopPane escritorio;
 	private GestionEquipo ge;
 	private GestionPaciente gp;
+<<<<<<< HEAD
+=======
+	private GestionRevista ga;
+	private GestionPais gpai;
+>>>>>>> branch 'master' of https://github.com/ChristianMocha/p12.git
 
 	public VentanaPrincipal() {
 		initComponets();
 		ge = new GestionEquipo();
+<<<<<<< HEAD
 		gp=new GestionPaciente();
+=======
+		ga = new GestionRevista();
+		gpai = new GestionPais();
+>>>>>>> branch 'master' of https://github.com/ChristianMocha/p12.git
 
 	}
 
@@ -40,16 +55,67 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 
 		JMenuBar barra = new JMenuBar();
 
+<<<<<<< HEAD
 		// aqui ponga el menu segun su orden......yo por ejemplo soy el ultimo y puse
 		// vtn 25 en
 		// adelante xq son 12 ventanas por cabeza ...agan cuenta con las ventanas de las
 		// tablas....
+=======
+		// aqui ponga el menu segun su orden......yo por ejemplo soy el ultimo y
+		// puse vtn 25 en
+		// adelante xq son 12 ventanas por cabeza ...agan cuenta con las
+		// ventanas de las tablas....
+		JMenu menuRevista = new JMenu("Revista");
+>>>>>>> branch 'master' of https://github.com/ChristianMocha/p12.git
 		JMenu menuEquipo = new JMenu("Equipo");
 		JMenu menuPaciente = new JMenu("Paciente");
+		JMenu menuPais = new JMenu("Pais");
 		JMenu menuSalir = new JMenu("Salir");
 
 		// aki ponga su subventanas...en el mismo menu ponga las ventans de las
 		// tablas...
+<<<<<<< HEAD
+=======
+		
+		JMenuItem autores = new JMenuItem("Datos de autor");
+		autores.addActionListener(this);
+		autores.setActionCommand("Autor");
+		menuRevista.add(autores);
+		
+		JMenuItem articulos = new JMenuItem("Datos de Articulo");
+		articulos.addActionListener(this);
+		articulos.setActionCommand("Articulo");
+		menuRevista.add(articulos);
+		
+		JMenuItem revistas = new JMenuItem("Datos de Revista");
+		revistas.addActionListener(this);
+		revistas.setActionCommand("Revista");
+		menuRevista.add(revistas);
+
+		
+		JMenuItem tblRevista = new JMenuItem("Tbl Revista");
+		tblRevista.addActionListener(this);
+		tblRevista.setActionCommand("tblRevista");
+		menuRevista.add(tblRevista);
+
+		JMenuItem paices = new JMenuItem("Datos de pais");
+		paices.addActionListener(this);
+		paices.setActionCommand("Pais");
+		menuPais.add(paices);
+
+		JMenuItem provincias = new JMenuItem("Datos de provincia");
+		provincias.addActionListener(this);
+		provincias.setActionCommand("Provincia");
+		menuPais.add(provincias);
+
+		JMenuItem cantones = new JMenuItem("Datos de canton");
+		cantones.addActionListener(this);
+		cantones.setActionCommand("Canton");
+		menuPais.add(cantones);
+
+		
+
+>>>>>>> branch 'master' of https://github.com/ChristianMocha/p12.git
 		JMenuItem jugadores = new JMenuItem("Datos del Jugador");
 		jugadores.addActionListener(this);
 		jugadores.setActionCommand("Jugador");
@@ -65,6 +131,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		fichaInscripcion.setActionCommand("Inscripcion");
 		menuEquipo.add(fichaInscripcion);
 
+<<<<<<< HEAD
 		// tablas....equipo
 
 		JMenuItem tblJugador = new JMenuItem("Tabla  Jugador");
@@ -83,6 +150,9 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		menuEquipo.add(tblFichaInscripcion);
 
 		// fin tablas
+=======
+		// aqui viene las tablas de JMenuItem del equipo.....
+>>>>>>> branch 'master' of https://github.com/ChristianMocha/p12.git
 
 		JMenuItem pacientes = new JMenuItem("Datos del Paciente");
 		pacientes.addActionListener(this);
@@ -98,14 +168,26 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		medicos.addActionListener(this);
 		medicos.setActionCommand("Medico");
 		menuPaciente.add(medicos);
+<<<<<<< HEAD
 		
+=======
+>>>>>>> branch 'master' of https://github.com/ChristianMocha/p12.git
 		// aki falta las tablas de JMenuItem de pacientes....
 
+<<<<<<< HEAD
 		JMenuItem tblPaciente = new JMenuItem("Tabla Paciente");
 		tblPaciente.addActionListener(this);
 		tblPaciente.setActionCommand("tblPaciente");
 		menuPaciente.add(tblPaciente);
+=======
+		/*
+		 * tblRect = new JMenuItem(lang.getString("TblRectores"));
+		 * tblRect.addActionListener(this);
+		 * tblRect.setActionCommand("tblRectores"); Ventana1.add(tblRect);
+		 */
+>>>>>>> branch 'master' of https://github.com/ChristianMocha/p12.git
 
+<<<<<<< HEAD
 		JMenuItem tblConsulta = new JMenuItem("Tabla de Consultas");
 		tblConsulta.addActionListener(this);
 		tblConsulta.setActionCommand("tblConsulta");
@@ -124,13 +206,17 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		 * Ventana1.add(tblRect);
 		 */
 
+=======
+>>>>>>> branch 'master' of https://github.com/ChristianMocha/p12.git
 		JMenuItem salir = new JMenuItem("Salir");
 		salir.addActionListener(this);
 		salir.setActionCommand("Salir");
 		menuSalir.add(salir);
 
+		barra.add(menuRevista);
 		barra.add(menuEquipo);
 		barra.add(menuPaciente);
+		barra.add(menuPais);
 		barra.add(menuSalir);
 		setJMenuBar(barra);
 	}
@@ -142,6 +228,28 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		System.out.println("Eventos menu " + comando);
 
 		switch (comando) {
+		case "Revista":
+			revistas();
+			break;
+		case "Articulo":
+			articulos();
+			break;
+		case "Autor":
+			autores();
+			break;
+		case "tblRevista":
+			tblRevista();
+			break;	
+		
+		case "Pais":
+			paices();
+			break;
+		case "Provincia":
+			provincias();
+			break;
+		case "Canton":
+			cantones();
+			break;
 		case "Jugador":
 			jugadores();
 			break;
@@ -193,6 +301,101 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		}
 
 	}
+<<<<<<< HEAD
+=======
+
+	private void revistas() {
+		VtnRevista vtn1 = new VtnRevista(this.ga);
+		vtn1.setVisible(true);
+		escritorio.add(vtn1);
+
+		try {
+			vtn1.setSelected(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	private void articulos() {
+		VtnArticulo vtn2 = new VtnArticulo(this.ga);
+		vtn2.setVisible(true);
+		escritorio.add(vtn2);
+
+		try {
+			vtn2.setSelected(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	private void autores() {
+		VtnAutor vtn3 = new VtnAutor(this.ga);
+		vtn3.setVisible(true);
+		escritorio.add(vtn3);
+
+		try {
+			vtn3.setSelected(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	private void tblRevista() {
+		VtnTblRevista vtntblre = new VtnTblRevista(this.ga);
+		vtntblre.setVisible(true);
+		escritorio.add(vtntblre);
+
+		try {
+			vtntblre.setSelected(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+	
+	
+	private void paices() {
+		VtnPais vtnpa = new VtnPais(this.gpai);
+		vtnpa.setVisible(true);
+		escritorio.add(vtnpa);
+
+		try {
+			vtnpa.setSelected(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	private void provincias() {
+		VtnProvincia vtnpro = new VtnProvincia(this.gpai);
+		vtnpro.setVisible(true);
+		escritorio.add(vtnpro);
+
+		try {
+			vtnpro.setSelected(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	private void cantones() {
+		VtnCanton vtnca = new VtnCanton(this.gpai);
+		vtnca.setVisible(true);
+		escritorio.add(vtnca);
+
+		try {
+			vtnca.setSelected(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+>>>>>>> branch 'master' of https://github.com/ChristianMocha/p12.git
 
 	private void jugadores() {
 		VtnJugador vtn25 = new VtnJugador(this.ge);
@@ -233,6 +436,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 
 	}
 
+<<<<<<< HEAD
 	private void tblJugador() {
 		VtnTblJugador vtn28 = new VtnTblJugador(this.ge);
 		vtn28.setVisible(true);
@@ -272,6 +476,8 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 
 	}
 
+=======
+>>>>>>> branch 'master' of https://github.com/ChristianMocha/p12.git
 	private void pacientes() {
 		VtnPaciente vtn31 = new VtnPaciente(this.gp);
 		vtn31.setVisible(true);
@@ -312,6 +518,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		}
 
 	}
+<<<<<<< HEAD
 
 	private void tblPaciente() {
 		VtnTblPaciente vtn34 = new VtnTblPaciente(this.gp);
@@ -351,6 +558,8 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		}
 
 	}
+=======
+>>>>>>> branch 'master' of https://github.com/ChristianMocha/p12.git
 
 	public void salir() {
 		System.exit(0);

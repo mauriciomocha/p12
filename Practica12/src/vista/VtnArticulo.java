@@ -22,22 +22,21 @@ import javax.swing.JTextField;
 
 import controlador.GestionRevista;
 import modelo.Articulo;
+import modelo.Autor;
 import modelo.Revista;
 
-public class VtnRevista extends JInternalFrame implements ActionListener {
-
-	private JTextField txtNumeroEdicion;
-	private JTextField txtArticulo;
-	private JTextField txtNombreRevista;
-	private JTextField txtIdioma;
+public class VtnArticulo extends JInternalFrame implements ActionListener {
+	private JTextField txtTitulo;
+	private JTextField txtpgInicio;
+	private JTextField txtpgFin;
+	private JTextField txtAutor;
 	private JTextArea txtListado;
-	private Articulo articulo;
-	private JComboBox comboArticulos;
-
+	private Autor autor;
+	private JComboBox comboAutores;
 	private GestionRevista ga;
 
 	private void initComponets() {
-		setTitle("Ventana Revista");
+		setTitle("Ventana Articulo");
 		setSize(300, 400);
 		setClosable(true);
 		setMaximizable(false);
@@ -45,25 +44,23 @@ public class VtnRevista extends JInternalFrame implements ActionListener {
 
 	}
 
-	public VtnRevista(GestionRevista ga) {
+	public VtnArticulo(GestionRevista ga) {
 		this.ga = ga;
 		initComponets();
 		setSize(369, 335);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(new GridLayout(2, 1));
 
-		JLabel etiqueta1 = new JLabel("Nombre Revista: ");
-		JLabel etiqueta2 = new JLabel("Idioma: ");
-		JLabel etiqueta3 = new JLabel("Numero (Edicion): ");
-		JLabel etiqueta4 = new JLabel("Articulo: ");
-
-		txtNombreRevista = new JTextField(20);
-		txtNumeroEdicion = new JTextField(20);
-		comboArticulos = new JComboBox();
-		
-		cargarArticulos();
-		txtIdioma = new JTextField(20);
+		JLabel etiqueta1 = new JLabel("Titulo: ");
+		JLabel etiqueta2 = new JLabel("Pg Inicio: ");
+		JLabel etiqueta3 = new JLabel("Pg Fin: ");
+		JLabel etiqueta4 = new JLabel("Autor: ");
+		txtpgInicio=new JTextField(20);
+		txtpgFin = new JTextField(20);
+		txtTitulo = new JTextField(20);
 		txtListado = new JTextArea(5, 20);
+		comboAutores = new JComboBox();
+		cargarAutores();
 
 		JButton boton1 = new JButton("Anadir");
 		boton1.addActionListener(this);
@@ -79,16 +76,16 @@ public class VtnRevista extends JInternalFrame implements ActionListener {
 
 		JPanel panel1 = new JPanel();
 		panel1.setLayout(new FlowLayout());
-		panel1.setBorder(BorderFactory.createTitledBorder("Datos Revista"));
+		panel1.setBorder(BorderFactory.createTitledBorder("Datos Articulo"));
 		getContentPane().add(panel1);
 		panel1.add(etiqueta1);
-		panel1.add(txtNombreRevista);
+		panel1.add(txtTitulo);
 		panel1.add(etiqueta2);
-		panel1.add(txtIdioma);
+		panel1.add(txtpgInicio);
 		panel1.add(etiqueta3);
-		panel1.add(txtNumeroEdicion);
+		panel1.add(txtpgFin);
 		panel1.add(etiqueta4);
-		panel1.add(comboArticulos);
+		panel1.add(comboAutores);
 
 		panel1.add(boton1, BorderLayout.SOUTH);
 		panel1.add(boton2, BorderLayout.SOUTH);
@@ -101,7 +98,7 @@ public class VtnRevista extends JInternalFrame implements ActionListener {
 		panel2.add(txtBaja);
 		panel2.add(boton3, BorderLayout.CENTER);
 
-	
+		//ga = new GestionRevista();
 
 		String nombre = JOptionPane.showInputDialog(this, "Introducir Nombre:");
 		if (nombre != null) {
@@ -128,7 +125,7 @@ public class VtnRevista extends JInternalFrame implements ActionListener {
 			terminar();
 			break;
 		case "btnAnadir":
-			cargar();
+		 cargar();
 			break;
 		case "btnBorrar":
 			vaciar();
@@ -140,25 +137,23 @@ public class VtnRevista extends JInternalFrame implements ActionListener {
 	}
 
 	public void cargar() {
-		int numeroEdicion = Integer.parseInt(txtNumeroEdicion.getText());
-		String nombre = txtNombreRevista.getText();
-		String idioma = txtIdioma.getText();
-		Articulo articulo = (Articulo) comboArticulos.getSelectedItem();
+		String titulo = txtTitulo.getText();
+		int pgInicio = Integer.parseInt(txtpgInicio.getText());
+		int pgFin = Integer.parseInt(txtpgFin.getText());
+		Autor autor = (Autor) comboAutores.getSelectedItem();
 
-		ga.agregarRevista(numeroEdicion, nombre, idioma, articulo);
+		ga.agregarArticulo(titulo, pgInicio, pgFin, autor);
 		JOptionPane.showMessageDialog(this, "Datos guardados", "Mensaje de información", JOptionPane.ERROR_MESSAGE);
 		listar();
 	}
 
 	public void listar() {
-		List<Revista> revistas = ga.getRevistas();
+		List<Articulo> articulos = ga.getArticulos();
 		txtListado.setText("");
-		for (int i = 0; i < revistas.size(); i++) {
-			Revista revista = revistas.get(i);
-			System.out.println(revista.getNombre() + "\n" + revista.getIdioma() + "\n" + revista.getNumEdicion() + "\n"
-					+ revista.getArticulo() + "\n");
-			txtListado.append(revista.getNombre() + " " + revista.getIdioma() + "\n" + revista.getNumEdicion() + "\n"
-					+ revista.getArticulo() + "\n");
+		for (int i = 0; i < articulos.size(); i++) {
+			Articulo articulo = articulos.get(i);
+			System.out.println(articulo.getTitulo() + articulo.getPaginaInicio() + articulo.getPaginaFin() + articulo.getAutor());
+			txtListado.append(articulo.getTitulo() + " " + articulo.getPaginaInicio() + "\n" + articulo.getPaginaFin() + "\n" + articulo.getAutor());
 		}
 
 	}
@@ -175,23 +170,22 @@ public class VtnRevista extends JInternalFrame implements ActionListener {
 	}
 
 	public void vaciar() {
-		txtNumeroEdicion.setText("");
-		//txtArticulo.setText("");
-		txtNombreRevista.setText("");
-		txtIdioma.setText("");
+		txtTitulo.setText("");
+		txtpgInicio.setText("");
+		txtpgFin.setText("");
 
 	}
 
-	private void cargarArticulos() {
+	private void cargarAutores() {
 		Vector model = new Vector();
-		List<Articulo> articulos = ga.getArticulos();
+		List<Autor> autores = ga.getAutores();
 
-		for (int i = 0; i < articulos.size(); i++) {
-			Articulo articulo = articulos.get(i);
-			model.addElement(articulo);
+		for (int i = 0; i < autores.size(); i++) {
+			Autor autor = autores.get(i);
+			model.addElement(autor);
 		}
 
-		comboArticulos = new JComboBox(model);
-	}
+		comboAutores = new JComboBox(model);
 
+	}
 }

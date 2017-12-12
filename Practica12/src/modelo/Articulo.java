@@ -45,4 +45,13 @@ public class Articulo {
 	public void setAutor(Autor autor) {
 		this.autor = autor;
 	}
+
+
+	public String toString() {
+		return titulo;
+	}
+	
+	
+	
+	
 }

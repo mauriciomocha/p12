@@ -27,4 +27,9 @@ public class Canton {
 		this.codigoPostal = codigoPostal;
 	}
 
+	public String toString() {
+		return nombreCanton;
+
+	}
+
 }

@@ -5,7 +5,7 @@ public class Provincia {
 	private String nombreProvincia;
 	private String region;
 
-	public Provincia(Canton canton, String nombreProvincia, String region) {
+	public Provincia(String nombreProvincia, String region, Canton canton) {
 		this.canton = canton;
 		this.nombreProvincia = nombreProvincia;
 		this.region = region;
@@ -33,6 +33,10 @@ public class Provincia {
 
 	public void setRegion(String region) {
 		this.region = region;
+	}
+
+	public String toString() {
+		return nombreProvincia;
 	}
 
 }

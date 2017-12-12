@@ -4,13 +4,13 @@ public class Pais {
 
 	private String nombrePais;
 	private Provincia provincia;
-	private int problacion;
+	private int poblacion;
 
-	public Pais(String nombrePais, Provincia provincia, int problacion) {
+	public Pais(String nombrePais, int poblacion, Provincia provincia) {
 
 		this.nombrePais = nombrePais;
 		this.provincia = provincia;
-		this.problacion = problacion;
+		this.poblacion = poblacion;
 	}
 
 	public String getNombrePais() {
@@ -30,11 +30,11 @@ public class Pais {
 	}
 
 	public int getProblacion() {
-		return problacion;
+		return poblacion;
 	}
 
 	public void setProblacion(int problacion) {
-		this.problacion = problacion;
+		this.poblacion = problacion;
 	}
 
 }

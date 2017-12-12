@@ -23,7 +23,7 @@ public class GestionEquipo {
 	
 	//prueba
 	
-	
+
 
 	public GestionEquipo() {
 		

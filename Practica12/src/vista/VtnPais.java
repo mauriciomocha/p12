@@ -20,21 +20,23 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import controlador.GestionPais;
 import controlador.GestionRevista;
 import modelo.Articulo;
+import modelo.Pais;
+import modelo.Provincia;
 import modelo.Revista;
 
-public class VtnRevista extends JInternalFrame implements ActionListener {
+public class VtnPais extends JInternalFrame implements ActionListener {
 
-	private JTextField txtNumeroEdicion;
-	private JTextField txtArticulo;
-	private JTextField txtNombreRevista;
-	private JTextField txtIdioma;
+	private JTextField txtnombrePais;
+	private JTextField txtPoblacion;
+	private JTextField txtProvincia;
 	private JTextArea txtListado;
-	private Articulo articulo;
-	private JComboBox comboArticulos;
+	private Provincia provincia;
+	private JComboBox comboPaices;
 
-	private GestionRevista ga;
+	private GestionPais gpai;
 
 	private void initComponets() {
 		setTitle("Ventana Revista");
@@ -45,24 +47,22 @@ public class VtnRevista extends JInternalFrame implements ActionListener {
 
 	}
 
-	public VtnRevista(GestionRevista ga) {
-		this.ga = ga;
+	public VtnPais(GestionPais gpai) {
+		this.gpai = gpai;
 		initComponets();
 		setSize(369, 335);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(new GridLayout(2, 1));
 
-		JLabel etiqueta1 = new JLabel("Nombre Revista: ");
-		JLabel etiqueta2 = new JLabel("Idioma: ");
-		JLabel etiqueta3 = new JLabel("Numero (Edicion): ");
-		JLabel etiqueta4 = new JLabel("Articulo: ");
+		JLabel etiqueta1 = new JLabel("Nombre Pais: ");
+		JLabel etiqueta2 = new JLabel("Poblacion: ");
+		JLabel etiqueta3 = new JLabel("Provincia: ");
 
-		txtNombreRevista = new JTextField(20);
-		txtNumeroEdicion = new JTextField(20);
-		comboArticulos = new JComboBox();
-		
-		cargarArticulos();
-		txtIdioma = new JTextField(20);
+		txtProvincia = new JTextField(20);
+		txtnombrePais = new JTextField(20);
+		txtPoblacion=new JTextField(20);
+		comboPaices = new JComboBox();
+		cargarPaices();
 		txtListado = new JTextArea(5, 20);
 
 		JButton boton1 = new JButton("Anadir");
@@ -82,13 +82,11 @@ public class VtnRevista extends JInternalFrame implements ActionListener {
 		panel1.setBorder(BorderFactory.createTitledBorder("Datos Revista"));
 		getContentPane().add(panel1);
 		panel1.add(etiqueta1);
-		panel1.add(txtNombreRevista);
+		panel1.add(txtnombrePais);
 		panel1.add(etiqueta2);
-		panel1.add(txtIdioma);
+		panel1.add(txtPoblacion);
 		panel1.add(etiqueta3);
-		panel1.add(txtNumeroEdicion);
-		panel1.add(etiqueta4);
-		panel1.add(comboArticulos);
+		panel1.add(comboPaices);
 
 		panel1.add(boton1, BorderLayout.SOUTH);
 		panel1.add(boton2, BorderLayout.SOUTH);
@@ -100,8 +98,6 @@ public class VtnRevista extends JInternalFrame implements ActionListener {
 		JScrollPane txtBaja = new JScrollPane(txtListado);
 		panel2.add(txtBaja);
 		panel2.add(boton3, BorderLayout.CENTER);
-
-	
 
 		String nombre = JOptionPane.showInputDialog(this, "Introducir Nombre:");
 		if (nombre != null) {
@@ -140,25 +136,21 @@ public class VtnRevista extends JInternalFrame implements ActionListener {
 	}
 
 	public void cargar() {
-		int numeroEdicion = Integer.parseInt(txtNumeroEdicion.getText());
-		String nombre = txtNombreRevista.getText();
-		String idioma = txtIdioma.getText();
-		Articulo articulo = (Articulo) comboArticulos.getSelectedItem();
-
-		ga.agregarRevista(numeroEdicion, nombre, idioma, articulo);
+		String nombre = txtnombrePais.getText();
+		int poblacion = Integer.parseInt(txtPoblacion.getText());
+		Provincia provincia = (Provincia) comboPaices.getSelectedItem();
+		gpai.agregarPais(nombre, poblacion, provincia);
 		JOptionPane.showMessageDialog(this, "Datos guardados", "Mensaje de información", JOptionPane.ERROR_MESSAGE);
 		listar();
 	}
 
 	public void listar() {
-		List<Revista> revistas = ga.getRevistas();
+		List<Pais> paices = gpai.getPaices();
 		txtListado.setText("");
-		for (int i = 0; i < revistas.size(); i++) {
-			Revista revista = revistas.get(i);
-			System.out.println(revista.getNombre() + "\n" + revista.getIdioma() + "\n" + revista.getNumEdicion() + "\n"
-					+ revista.getArticulo() + "\n");
-			txtListado.append(revista.getNombre() + " " + revista.getIdioma() + "\n" + revista.getNumEdicion() + "\n"
-					+ revista.getArticulo() + "\n");
+		for (int i = 0; i < paices.size(); i++) {
+			Pais pais = paices.get(i);
+			System.out.println(pais.getNombrePais()+pais.getProblacion()+pais.getProvincia());
+			txtListado.append(pais.getNombrePais()+" "+pais.getProblacion()+"\n"+pais.getProvincia());
 		}
 
 	}
@@ -175,23 +167,21 @@ public class VtnRevista extends JInternalFrame implements ActionListener {
 	}
 
 	public void vaciar() {
-		txtNumeroEdicion.setText("");
-		//txtArticulo.setText("");
-		txtNombreRevista.setText("");
-		txtIdioma.setText("");
+		txtnombrePais.setText("");
+		txtPoblacion.setText(" ");
 
 	}
 
-	private void cargarArticulos() {
+	private void cargarPaices() {
 		Vector model = new Vector();
-		List<Articulo> articulos = ga.getArticulos();
+		List<Provincia> provincias = gpai.getProvincias();
 
-		for (int i = 0; i < articulos.size(); i++) {
-			Articulo articulo = articulos.get(i);
-			model.addElement(articulo);
+		for (int i = 0; i < provincias.size(); i++) {
+			Provincia provincia = provincias.get(i);
+			model.addElement(provincia);
 		}
 
-		comboArticulos = new JComboBox(model);
+		comboPaices = new JComboBox(model);
 	}
 
 }
