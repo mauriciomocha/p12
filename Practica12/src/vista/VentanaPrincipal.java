@@ -57,15 +57,27 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 
 		// aki ponga su subventanas...en el mismo menu ponga las ventans de las
 		// tablas...
+		
+		JMenuItem autores = new JMenuItem("Datos de autor");
+		autores.addActionListener(this);
+		autores.setActionCommand("Autor");
+		menuRevista.add(autores);
+		
+		JMenuItem articulos = new JMenuItem("Datos de Articulo");
+		articulos.addActionListener(this);
+		articulos.setActionCommand("Articulo");
+		menuRevista.add(articulos);
+		
 		JMenuItem revistas = new JMenuItem("Datos de Revista");
 		revistas.addActionListener(this);
 		revistas.setActionCommand("Revista");
 		menuRevista.add(revistas);
 
-		JMenuItem articulos = new JMenuItem("Datos de Articulo");
-		articulos.addActionListener(this);
-		articulos.setActionCommand("Articulo");
-		menuRevista.add(articulos);
+		
+		JMenuItem tblRevista = new JMenuItem("Tbl Revista");
+		tblRevista.addActionListener(this);
+		tblRevista.setActionCommand("tblRevista");
+		menuRevista.add(tblRevista);
 
 		JMenuItem paices = new JMenuItem("Datos de pais");
 		paices.addActionListener(this);
@@ -82,10 +94,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		cantones.setActionCommand("Canton");
 		menuPais.add(cantones);
 
-		JMenuItem autores = new JMenuItem("Datos de autor");
-		autores.addActionListener(this);
-		autores.setActionCommand("Autor");
-		menuRevista.add(autores);
+		
 
 		JMenuItem jugadores = new JMenuItem("Datos del Jugador");
 		jugadores.addActionListener(this);
@@ -155,6 +164,10 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		case "Autor":
 			autores();
 			break;
+		case "tblRevista":
+			tblRevista();
+			break;	
+		
 		case "Pais":
 			paices();
 			break;
@@ -231,6 +244,20 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 
 	}
 
+	private void tblRevista() {
+		VtnTblRevista vtntblre = new VtnTblRevista(this.ga);
+		vtntblre.setVisible(true);
+		escritorio.add(vtntblre);
+
+		try {
+			vtntblre.setSelected(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+	
+	
 	private void paices() {
 		VtnPais vtnpa = new VtnPais(this.gpai);
 		vtnpa.setVisible(true);
