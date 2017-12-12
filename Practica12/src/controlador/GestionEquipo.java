@@ -19,6 +19,11 @@ public class GestionEquipo {
 	private List<Jugador>jugadores;
 	
 	
+	
+	
+	//prueba
+	
+	
 
 	public GestionEquipo() {
 		
