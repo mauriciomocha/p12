@@ -53,7 +53,7 @@ public class GestionRevista {
 		au.setApellido(apellido);
 		au.setCedula(cedula);
 		au.setEdad(edad);
-
+		autores.add(au);
 	}
 
 	public List<Autor> getAutores() {

@@ -20,23 +20,26 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import controlador.GestionPais;
 import controlador.GestionRevista;
 import modelo.Articulo;
-import modelo.Autor;
+import modelo.Pais;
+import modelo.Provincia;
 import modelo.Revista;
 
-public class VtnArticulo extends JInternalFrame implements ActionListener {
-	private JTextField txtTitulo;
-	private JTextField txtpgInicio;
-	private JTextField txtpgFin;
-	private JTextField txtAutor;
+public class VtnPais extends JInternalFrame implements ActionListener {
+
+	private JTextField txtnombrePais;
+	private JTextField txtPoblacion;
+	private JTextField txtProvincia;
 	private JTextArea txtListado;
-	private Autor autor;
-	private JComboBox comboAutores;
-	private GestionRevista ga;
+	private Provincia provincia;
+	private JComboBox comboPaices;
+
+	private GestionPais gpai;
 
 	private void initComponets() {
-		setTitle("Ventana Articulo");
+		setTitle("Ventana Revista");
 		setSize(300, 400);
 		setClosable(true);
 		setMaximizable(false);
@@ -44,23 +47,23 @@ public class VtnArticulo extends JInternalFrame implements ActionListener {
 
 	}
 
-	public VtnArticulo(GestionRevista ga) {
-		this.ga = ga;
+	public VtnPais(GestionPais gpai) {
+		this.gpai = gpai;
 		initComponets();
 		setSize(369, 335);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(new GridLayout(2, 1));
 
-		JLabel etiqueta1 = new JLabel("Titulo: ");
-		JLabel etiqueta2 = new JLabel("Pg Inicio: ");
-		JLabel etiqueta3 = new JLabel("Pg Fin: ");
-		JLabel etiqueta4 = new JLabel("Autor: ");
-		txtpgInicio=new JTextField(20);
-		txtpgFin = new JTextField(20);
-		txtTitulo = new JTextField(20);
+		JLabel etiqueta1 = new JLabel("Nombre Pais: ");
+		JLabel etiqueta2 = new JLabel("Poblacion: ");
+		JLabel etiqueta3 = new JLabel("Provincia: ");
+
+		txtProvincia = new JTextField(20);
+		txtnombrePais = new JTextField(20);
+		txtPoblacion=new JTextField(20);
+		comboPaices = new JComboBox();
+		cargarPaices();
 		txtListado = new JTextArea(5, 20);
-		comboAutores = new JComboBox();
-		cargarAutores();
 
 		JButton boton1 = new JButton("Anadir");
 		boton1.addActionListener(this);
@@ -76,16 +79,14 @@ public class VtnArticulo extends JInternalFrame implements ActionListener {
 
 		JPanel panel1 = new JPanel();
 		panel1.setLayout(new FlowLayout());
-		panel1.setBorder(BorderFactory.createTitledBorder("Datos Articulo"));
+		panel1.setBorder(BorderFactory.createTitledBorder("Datos Revista"));
 		getContentPane().add(panel1);
 		panel1.add(etiqueta1);
-		panel1.add(txtTitulo);
+		panel1.add(txtnombrePais);
 		panel1.add(etiqueta2);
-		panel1.add(txtpgInicio);
+		panel1.add(txtPoblacion);
 		panel1.add(etiqueta3);
-		panel1.add(txtpgFin);
-		panel1.add(etiqueta4);
-		panel1.add(comboAutores);
+		panel1.add(comboPaices);
 
 		panel1.add(boton1, BorderLayout.SOUTH);
 		panel1.add(boton2, BorderLayout.SOUTH);
@@ -97,8 +98,6 @@ public class VtnArticulo extends JInternalFrame implements ActionListener {
 		JScrollPane txtBaja = new JScrollPane(txtListado);
 		panel2.add(txtBaja);
 		panel2.add(boton3, BorderLayout.CENTER);
-
-		//ga = new GestionRevista();
 
 		String nombre = JOptionPane.showInputDialog(this, "Introducir Nombre:");
 		if (nombre != null) {
@@ -125,7 +124,7 @@ public class VtnArticulo extends JInternalFrame implements ActionListener {
 			terminar();
 			break;
 		case "btnAnadir":
-		 cargar();
+			cargar();
 			break;
 		case "btnBorrar":
 			vaciar();
@@ -137,23 +136,21 @@ public class VtnArticulo extends JInternalFrame implements ActionListener {
 	}
 
 	public void cargar() {
-		String titulo = txtTitulo.getText();
-		int pgInicio = Integer.parseInt(txtpgInicio.getText());
-		int pgFin = Integer.parseInt(txtpgFin.getText());
-		Autor autor = (Autor) comboAutores.getSelectedItem();
-
-		ga.agregarArticulo(titulo, pgInicio, pgFin, autor);
+		String nombre = txtnombrePais.getText();
+		int poblacion = Integer.parseInt(txtPoblacion.getText());
+		Provincia provincia = (Provincia) comboPaices.getSelectedItem();
+		gpai.agregarPais(nombre, poblacion, provincia);
 		JOptionPane.showMessageDialog(this, "Datos guardados", "Mensaje de información", JOptionPane.ERROR_MESSAGE);
 		listar();
 	}
 
 	public void listar() {
-		List<Articulo> articulos = ga.getArticulos();
+		List<Pais> paices = gpai.getPaices();
 		txtListado.setText("");
-		for (int i = 0; i < articulos.size(); i++) {
-			Articulo articulo = articulos.get(i);
-			System.out.println(articulo.getTitulo() + articulo.getPaginaInicio() + articulo.getPaginaFin() + articulo.getAutor());
-			txtListado.append(articulo.getTitulo() + " " + articulo.getPaginaInicio() + "\n" + articulo.getPaginaFin() + "\n" + articulo.getAutor());
+		for (int i = 0; i < paices.size(); i++) {
+			Pais pais = paices.get(i);
+			System.out.println(pais.getNombrePais()+pais.getProblacion()+pais.getProvincia());
+			txtListado.append(pais.getNombrePais()+" "+pais.getProblacion()+"\n"+pais.getProvincia());
 		}
 
 	}
@@ -170,22 +167,21 @@ public class VtnArticulo extends JInternalFrame implements ActionListener {
 	}
 
 	public void vaciar() {
-		txtTitulo.setText("");
-		txtpgInicio.setText("");
-		txtpgFin.setText("");
+		txtnombrePais.setText("");
+		txtPoblacion.setText(" ");
 
 	}
 
-	private void cargarAutores() {
+	private void cargarPaices() {
 		Vector model = new Vector();
-		List<Autor> autores = ga.getAutores();
+		List<Provincia> provincias = gpai.getProvincias();
 
-		for (int i = 0; i < autores.size(); i++) {
-			Autor autor = autores.get(i);
-			model.addElement(autor);
+		for (int i = 0; i < provincias.size(); i++) {
+			Provincia provincia = provincias.get(i);
+			model.addElement(provincia);
 		}
 
-		comboAutores = new JComboBox(model);
-
+		comboPaices = new JComboBox(model);
 	}
+
 }

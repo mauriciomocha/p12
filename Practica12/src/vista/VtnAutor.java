@@ -74,7 +74,7 @@ public class VtnAutor extends JInternalFrame implements ActionListener {
 
 		JPanel panel1 = new JPanel();
 		panel1.setLayout(new FlowLayout());
-		panel1.setBorder(BorderFactory.createTitledBorder("Datos Revista"));
+		panel1.setBorder(BorderFactory.createTitledBorder("Datos Autor"));
 		getContentPane().add(panel1);
 		panel1.add(etiqueta1);
 		panel1.add(txtNombreAutor);
@@ -96,7 +96,7 @@ public class VtnAutor extends JInternalFrame implements ActionListener {
 		panel2.add(txtBaja);
 		panel2.add(boton3, BorderLayout.CENTER);
 
-		ga = new GestionRevista();
+		//ga = new GestionRevista();
 
 		String nombre = JOptionPane.showInputDialog(this, "Introducir Nombre:");
 		if (nombre != null) {
@@ -123,7 +123,7 @@ public class VtnAutor extends JInternalFrame implements ActionListener {
 			terminar();
 			break;
 		case "btnAnadir":
-			// cargar();
+			cargar();
 			break;
 		case "btnBorrar":
 			vaciar();
@@ -135,11 +135,11 @@ public class VtnAutor extends JInternalFrame implements ActionListener {
 	}
 
 	public void cargar() {
+		System.out.println("Hola");
 		String nombre = txtNombreAutor.getText();
 		String apellido = txtApellidoAutor.getText();
 		String cedula = txtCedula.getText();
 		int edad = Integer.parseInt(txtEdad.getText());
-
 		ga.agregarAutor(nombre, apellido, cedula, edad);
 		JOptionPane.showMessageDialog(this, "Datos guardados", "Mensaje de información", JOptionPane.ERROR_MESSAGE);
 		listar();
