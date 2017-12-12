@@ -1,5 +1,7 @@
 package modelo;
 
+import java.util.List;
+
 public class Resultado {
 
 	private String puesto;
@@ -25,6 +27,14 @@ public class Resultado {
 
 	public void setAtleta(Atleta atleta) {
 		this.atleta = atleta;
+	}
+	public static List<Resultado> getTodos() {
+
+		return null;
+	}
+
+	public String toString() {
+		return "- " + puesto + " " + atleta;
 	}
 
 }

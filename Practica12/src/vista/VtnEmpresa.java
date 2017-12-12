@@ -6,9 +6,11 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
@@ -20,12 +22,17 @@ import javax.swing.JTextField;
 
 
 import controlador.GestionEmpresa;
+import modelo.Consulta;
+import modelo.Departamento;
+import modelo.Empresa;
+import modelo.Medico;
 
 
 public class VtnEmpresa extends JInternalFrame implements ActionListener {
 	private JTextField txtNombre;
 	private JTextField txtDireccion;
 	private JTextField txtDepartamento;
+	private JComboBox comDepartamento;
 	private JTextArea txtListado;
 
 	private GestionEmpresa ge;
@@ -45,6 +52,10 @@ public class VtnEmpresa extends JInternalFrame implements ActionListener {
 		setSize(369, 335);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(new GridLayout(2, 1));
+		
+		comDepartamento = new JComboBox();
+		cargarVtnDepartamento();
+		
 
 		JLabel etiqueta1 = new JLabel("Nombre Empresa: ");
 		JLabel etiqueta2 = new JLabel("Direccion: ");
@@ -80,7 +91,7 @@ public class VtnEmpresa extends JInternalFrame implements ActionListener {
 		panel1.add(etiqueta2);
 		panel1.add(txtDireccion);
 		panel1.add(etiqueta3);
-		panel1.add(txtDepartamento);
+		panel1.add(comDepartamento);
 	
 
 		panel1.add(boton1, BorderLayout.SOUTH);
@@ -110,6 +121,18 @@ public class VtnEmpresa extends JInternalFrame implements ActionListener {
 		}
 
 	}
+	private void cargarVtnDepartamento() {
+		Vector model = new Vector();
+		List<Departamento> departamentos = ge.getDepartamentos();
+
+		for (int i = 0; i < departamentos.size(); i++) {
+			Departamento Departamento = departamentos.get(i);
+			model.addElement(Departamento);
+		}
+		comDepartamento = new JComboBox(model);
+
+	}
+
 
 	public void actionPerformed(ActionEvent evt) {
 		// System.out.println("evento boton");
@@ -133,23 +156,41 @@ public class VtnEmpresa extends JInternalFrame implements ActionListener {
 		}
 
 	}
+	
 
 	
-	/*public void guardar(){
+	private void guardar() {
+
 		String nombre = txtNombre.getText();
-		String direccion= txtDireccion.getText();
-		String departamento=txtDepartamento.getText();
+		String direccion = txtDireccion.getText();
+		Departamento departamento=(Departamento)comDepartamento.getSelectedItem();
+	
 		
-	//	ge.
-	//	JOptionPane.showMessageDialog(this, "Datos guardados", 
-				"Mensaje de información", JOptionPane.INFORMATION_MESSAGE);
+		ge.agregarEmpresa(nombre, direccion, departamento);
 		listar();
-	}
-	
-	public void listar(){
-	
+			
 		
-	}*/
+	
+	}
+
+	private void listar() {
+		List<Empresa> empresas = ge.getEmpresas();
+		txtListado.setText("");
+		for (int i = 0; i < empresas.size(); i++) {
+			Empresa empresa = empresas.get(i);
+			System.out.println("Nombre: " + empresa.getNombre() + "\n" 
+			+ "Direccion: " + empresa.getDireccion() + "\n"
+					+ "Departamento: " + empresa.getDepartamento()
+					+ "\n" + "Nombre Departamento: " + empresa.getDepartamento().getNombreDepartamento() 
+					+ "\n" + "Empleado: " + empresa.getDepartamento().getEmpleado() + "\n" 
+					+ "\n" + "Nombre del Empleado: " + empresa.getDepartamento().getEmpleado().getNombre()
+					+ "\n" + "Apellido del Empleado: " + empresa.getDepartamento().getEmpleado().getApellido()
+					+ "Cedula: " + empresa.getDepartamento().getEmpleado().getCedula() + "\n" 
+					+ "Edad: " + empresa.getDepartamento().getEmpleado().getEdad() + "\n");
+
+		}	
+		}
+
 	  
 	public void terminar() {
 		int opcion = JOptionPane.showConfirmDialog(this, "Desea dar por terminado el programa ?", "Mensaje",
