@@ -14,7 +14,7 @@ public class GestionEquipo {
 	private List<FichaDeInscripcion> fichaDeInscripciones;
 	private List<Jugador> jugadores;
 	
-	
+	//prueba....
 
 	public GestionEquipo() {
 		
