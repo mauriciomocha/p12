@@ -32,7 +32,7 @@ public class VtnDepartamento extends JInternalFrame implements ActionListener{
 		setClosable(true);
 		setMaximizable(false);
 		setMaximizable(true);
-
+//
 	}
 
 	public VtnDepartamento(GestionEmpresa ge) {
