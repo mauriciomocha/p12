@@ -154,6 +154,7 @@ public class VtnEquipo extends JInternalFrame implements ActionListener {
 		Jugador jugador = (Jugador) comJugador.getSelectedItem();
 
 		ge.agregarEquipo(jugador, nombreEquipo, cantidadJugador);
+		
 		listar();
 
 	}

@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import modelo.Equipo;
 import modelo.FichaDeInscripcion;
 import modelo.Jugador;
@@ -101,23 +103,30 @@ public class GestionEquipo {
 	
 	
 	
+	
+	
 	private String pathEquipos= "archivos/equipos.txt";
 
 	public void guardarEquipo(Equipo e) {
 		try {
-			FileWriter file = new FileWriter(pathEquipos, true);
-			BufferedWriter out = new BufferedWriter(file);
-			String registro = "Nombre Jugador: " +e.getJugador().getNombre()+";" +"\n"
-			+ "Apellido Jugador: "+ e.getJugador().getApellido()+"\n"
-			+ "Nombre del Equipo: " + e.getNombreEquipo()+";" +"\n"
-			+ " Cantidad de Jugadores: " + e.getCantidadJugadores() +"\n";
+			FileWriter archivo = new FileWriter(pathEquipos, true);
+			BufferedWriter out = new BufferedWriter(archivo);
+			String registro =
+			"Nombre Jugador: " + e.getJugador().getNombre()+";" + "|"
+			+ "Apellido Jugador: " + e.getJugador().getApellido()+ "|"
+			+ "Nombre del Equipo: " + e.getNombreEquipo()+";" +"|"
+			+ " Cantidad de Jugadores: " + e.getCantidadJugadores() + "|";
 			out.append(registro + "\n");
 			out.close();
-			file.close();
+			archivo.close();
 		} catch (IOException i) {
 			
-			i.printStackTrace();
+			JOptionPane.showMessageDialog(null, i);
 		}
 	}
+	
+	
+	
+	
 	
 }
