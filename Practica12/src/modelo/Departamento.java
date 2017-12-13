@@ -1,5 +1,7 @@
 package modelo;
 
+import java.util.List;
+
 public class Departamento {
 	
 	private Empleado empleado;
@@ -25,6 +27,14 @@ public class Departamento {
 
 	public void setNombreDepartamento(String nombreDepartamento) {
 		this.nombreDepartamento = nombreDepartamento;
+	}
+	public static List<Departamento> getTodos() {
+
+		return null;
+	}
+
+	public String toString() {
+		return "- " + nombreDepartamento + " " + empleado;
 	}
 
 }

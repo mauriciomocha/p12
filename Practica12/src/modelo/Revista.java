@@ -8,7 +8,7 @@ public class Revista {
 	private Articulo articulo;
 
 	public Revista(int numEdicion, String nombre, String idioma, Articulo articulo) {
-		super();
+	
 		this.numEdicion = numEdicion;
 		this.nombre = nombre;
 		this.idioma = idioma;

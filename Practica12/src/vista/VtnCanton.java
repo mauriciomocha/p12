@@ -5,9 +5,12 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
@@ -17,44 +20,42 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import controlador.GestionEmpresa;
+import controlador.GestionPais;
+import modelo.Canton;
+import modelo.Provincia;
 
-public class VtnDepartamento extends JInternalFrame implements ActionListener{
-	private JTextField txtNombre;
-	private JTextField txtEmpleado;
+public class VtnCanton extends JInternalFrame implements ActionListener {
+	
+	private JTextField txtnombreCanton;
+	private JTextField txtCodigoPostal;
 	private JTextArea txtListado;
 
-	private GestionEmpresa ge;
+	private GestionPais gpai;
 
 	private void initComponets() {
-		setTitle("Ventana Empresa");
+		setTitle("Ventana Canton");
 		setSize(300, 400);
 		setClosable(true);
 		setMaximizable(false);
 		setMaximizable(true);
-//
+
 	}
 
-	public VtnDepartamento(GestionEmpresa ge) {
-		this.ge = ge;
+	public VtnCanton(GestionPais gpai) {
+		this.gpai = gpai;
 		initComponets();
 		setSize(369, 335);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(new GridLayout(2, 1));
 
-		JLabel etiqueta1 = new JLabel("Nombre : ");
-		JLabel etiqueta2 = new JLabel("Empleado: ");
+		JLabel etiqueta1 = new JLabel("Nombre Canton: ");
+		JLabel etiqueta2 = new JLabel("Codigo Postal: ");
 
+		txtnombreCanton = new JTextField(20);
+		txtCodigoPostal = new JTextField(20);
 		
-		
-		
-		
-		
-		txtNombre=new JTextField(20);
-		txtEmpleado = new JTextField(20);
-	
 		txtListado = new JTextArea(5, 20);
-		
+
 		JButton boton1 = new JButton("Anadir");
 		boton1.addActionListener(this);
 		boton1.setActionCommand("btnAnadir");
@@ -69,29 +70,23 @@ public class VtnDepartamento extends JInternalFrame implements ActionListener{
 
 		JPanel panel1 = new JPanel();
 		panel1.setLayout(new FlowLayout());
-		panel1.setBorder(BorderFactory.createTitledBorder("Datos Empresa"));
+		panel1.setBorder(BorderFactory.createTitledBorder("Datos Revista"));
 		getContentPane().add(panel1);
 		panel1.add(etiqueta1);
-		panel1.add(txtNombre);
+		panel1.add(txtnombreCanton);
 		panel1.add(etiqueta2);
-		panel1.add(txtEmpleado);
-		
-	
+		panel1.add(txtCodigoPostal);
 
 		panel1.add(boton1, BorderLayout.SOUTH);
 		panel1.add(boton2, BorderLayout.SOUTH);
-		
 
 		JPanel panel2 = new JPanel();
 		panel2.setLayout(new FlowLayout());
 		panel2.setBorder(BorderFactory.createTitledBorder("Listado"));
 		getContentPane().add(panel2);
-		JScrollPane txtBaja=new JScrollPane(txtListado);
+		JScrollPane txtBaja = new JScrollPane(txtListado);
 		panel2.add(txtBaja);
 		panel2.add(boton3, BorderLayout.CENTER);
-
-
-		ge = new GestionEmpresa();
 
 		String nombre = JOptionPane.showInputDialog(this, "Introducir Nombre:");
 		if (nombre != null) {
@@ -118,7 +113,7 @@ public class VtnDepartamento extends JInternalFrame implements ActionListener{
 			terminar();
 			break;
 		case "btnAnadir":
-			//guardar();
+			cargar();
 			break;
 		case "btnBorrar":
 			vaciar();
@@ -129,23 +124,25 @@ public class VtnDepartamento extends JInternalFrame implements ActionListener{
 
 	}
 
-	
-	/*public void guardar(){
-		String nombre = txtNombre.getText();
-		String empleado= txtEmpleado.getText();
-	
-		
-	//	ge.
-	//	JOptionPane.showMessageDialog(this, "Datos guardados", 
-				"Mensaje de información", JOptionPane.INFORMATION_MESSAGE);
+	public void cargar() {
+		String nombre = txtnombreCanton.getText();
+		int codigo =Integer.parseInt(txtCodigoPostal.getText());
+		gpai.agregarCanton(nombre, codigo);
+		JOptionPane.showMessageDialog(this, "Datos guardados", "Mensaje de información", JOptionPane.ERROR_MESSAGE);
 		listar();
 	}
-	
-	public void listar(){
-	
-		
-	}*/
-	  
+
+	public void listar() {
+		List<Canton> cantones = gpai.getCantones();
+		txtListado.setText("");
+		for (int i = 0; i < cantones.size(); i++) {
+			Canton canton = cantones.get(i);
+			System.out.println(canton.getNombreCanton()+canton.getCodigoPostal());
+			txtListado.append(canton.getNombreCanton()+" "+canton.getCodigoPostal());
+		}
+
+	}
+
 	public void terminar() {
 		int opcion = JOptionPane.showConfirmDialog(this, "Desea dar por terminado el programa ?", "Mensaje",
 				JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
@@ -158,13 +155,10 @@ public class VtnDepartamento extends JInternalFrame implements ActionListener{
 	}
 
 	public void vaciar() {
-		txtNombre.setText("");
-		txtEmpleado.setText("");
-
-	
+		txtnombreCanton.setText("");
+		txtCodigoPostal.setText(" ");
 
 	}
 
-
-
+	
 }
