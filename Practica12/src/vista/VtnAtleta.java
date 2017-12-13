@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -18,6 +19,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import controlador.GestionCompetencia;
+import modelo.Atleta;
+import modelo.Paciente;
 
 public class VtnAtleta extends JInternalFrame implements ActionListener{
 	private JTextField txtNombre;
@@ -121,7 +124,7 @@ public class VtnAtleta extends JInternalFrame implements ActionListener{
 			terminar();
 			break;
 		case "btnAnadir":
-			//guardar();
+			guardar();
 			break;
 		case "btnBorrar":
 			vaciar();
@@ -133,22 +136,42 @@ public class VtnAtleta extends JInternalFrame implements ActionListener{
 	}
 
 	
-	/*public void guardar(){
+	private void guardar() {
+
 		String nombre = txtNombre.getText();
-		String apellido= txtApellido.getText();
-		String cedula=txtCedula.getText();
-		String edad=txtEdad.getText();
+		String apellido = txtApellido.getText();
+		String cedula = txtCedula.getText();
+		int edad = Integer.parseInt(txtEdad.getText());
 		
-	//	ge.
-	//	JOptionPane.showMessageDialog(this, "Datos guardados", 
-				"Mensaje de información", JOptionPane.INFORMATION_MESSAGE);
+	try {
+		
+		if(gc.isCedulaValida(cedula)) {
+			
+		gc.agregarAtleta(nombre, apellido, cedula, edad);
 		listar();
-	}
-	
-	public void listar(){
-	
 		
-	}*/
+		}
+	}catch (Exception e) {
+		JOptionPane.showMessageDialog(this, e.getMessage(),
+				"Mensaje de error", JOptionPane.ERROR_MESSAGE);
+		e.printStackTrace();
+	}
+	}
+
+	private void listar() {
+		List<Atleta> atletas = gc.getAtletas();
+		txtListado.setText("");
+		for (int i = 0; i < atletas.size(); i++) {
+			Atleta atleta = atletas.get(i);
+			System.out.println("Nombre: " + atleta.getNombre() + "\n" + "Apellido: " + atleta.getApellido() + "\n"
+					+ "Cedula: " + atleta.getCedula() + "\n" + "Edad: " + atleta.getEdad() + "\n");
+
+			txtListado.append("Nombre: " + atleta.getNombre() + "\n" + "Apellido: " + atleta.getApellido() + "\n"
+					+ "Cedula: " + atleta.getCedula() + "\n" + "Edad: " + atleta.getEdad() + "\n");
+		}
+
+	}
+
 	  
 	public void terminar() {
 		int opcion = JOptionPane.showConfirmDialog(this, "Desea dar por terminado el programa ?", "Mensaje",

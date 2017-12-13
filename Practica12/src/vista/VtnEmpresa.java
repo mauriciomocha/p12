@@ -26,6 +26,7 @@ import modelo.Consulta;
 import modelo.Departamento;
 import modelo.Empresa;
 import modelo.Medico;
+import modelo.Paciente;
 
 
 public class VtnEmpresa extends JInternalFrame implements ActionListener {
@@ -146,7 +147,7 @@ public class VtnEmpresa extends JInternalFrame implements ActionListener {
 			terminar();
 			break;
 		case "btnAnadir":
-			//guardar();
+			guardar();
 			break;
 		case "btnBorrar":
 			vaciar();
@@ -163,14 +164,14 @@ public class VtnEmpresa extends JInternalFrame implements ActionListener {
 
 		String nombre = txtNombre.getText();
 		String direccion = txtDireccion.getText();
-		Departamento departamento=(Departamento)comDepartamento.getSelectedItem();
-	
+		Departamento departamento = (Departamento)comDepartamento.getSelectedItem();
 		
+
+			
 		ge.agregarEmpresa(nombre, direccion, departamento);
 		listar();
-			
 		
-	
+		
 	}
 
 	private void listar() {
@@ -178,18 +179,15 @@ public class VtnEmpresa extends JInternalFrame implements ActionListener {
 		txtListado.setText("");
 		for (int i = 0; i < empresas.size(); i++) {
 			Empresa empresa = empresas.get(i);
-			System.out.println("Nombre: " + empresa.getNombre() + "\n" 
-			+ "Direccion: " + empresa.getDireccion() + "\n"
-					+ "Departamento: " + empresa.getDepartamento()
-					+ "\n" + "Nombre Departamento: " + empresa.getDepartamento().getNombreDepartamento() 
-					+ "\n" + "Empleado: " + empresa.getDepartamento().getEmpleado() + "\n" 
-					+ "\n" + "Nombre del Empleado: " + empresa.getDepartamento().getEmpleado().getNombre()
-					+ "\n" + "Apellido del Empleado: " + empresa.getDepartamento().getEmpleado().getApellido()
-					+ "Cedula: " + empresa.getDepartamento().getEmpleado().getCedula() + "\n" 
-					+ "Edad: " + empresa.getDepartamento().getEmpleado().getEdad() + "\n");
+			System.out.println("Nombre: " + empresa.getNombre() + "\n" + "Direccion: " + empresa.getDireccion()+ "\n"
+					+ "Departamento: " + empresa.getDepartamento()+ "\n" );
 
-		}	
+			txtListado.append("Nombre: " + empresa.getNombre() + "\n" + "Direccion: " + empresa.getDireccion() + "\n"
+					+ "Departamento: " + empresa.getDepartamento() + "\n" );
 		}
+
+	}
+
 
 	  
 	public void terminar() {

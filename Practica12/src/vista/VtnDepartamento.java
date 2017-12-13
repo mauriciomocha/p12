@@ -5,9 +5,12 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
@@ -18,11 +21,15 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import controlador.GestionEmpresa;
+import modelo.Departamento;
+import modelo.Empleado;
+import modelo.Paciente;
 
 public class VtnDepartamento extends JInternalFrame implements ActionListener{
 	private JTextField txtNombre;
 	private JTextField txtEmpleado;
 	private JTextArea txtListado;
+	private JComboBox comEmpleado;
 
 	private GestionEmpresa ge;
 
@@ -45,7 +52,8 @@ public class VtnDepartamento extends JInternalFrame implements ActionListener{
 		JLabel etiqueta1 = new JLabel("Nombre : ");
 		JLabel etiqueta2 = new JLabel("Empleado: ");
 
-		
+		comEmpleado=new JComboBox();
+		cargarVtnEmpleado();
 		
 		
 		
@@ -74,7 +82,7 @@ public class VtnDepartamento extends JInternalFrame implements ActionListener{
 		panel1.add(etiqueta1);
 		panel1.add(txtNombre);
 		panel1.add(etiqueta2);
-		panel1.add(txtEmpleado);
+		panel1.add(comEmpleado);
 		
 	
 
@@ -103,6 +111,19 @@ public class VtnDepartamento extends JInternalFrame implements ActionListener{
 					JOptionPane.ERROR_MESSAGE);
 			System.exit(0);
 		}
+		
+	
+
+	}
+	private void cargarVtnEmpleado() {
+		Vector model = new Vector();
+		List<Empleado> empleados = ge.getEmpleados();
+
+		for (int i = 0; i < empleados.size(); i++) {
+			Empleado empleado = empleados.get(i);
+			model.addElement(empleado);
+		}
+		comEmpleado = new JComboBox(model);
 
 	}
 
@@ -118,7 +139,7 @@ public class VtnDepartamento extends JInternalFrame implements ActionListener{
 			terminar();
 			break;
 		case "btnAnadir":
-			//guardar();
+			guardar();
 			break;
 		case "btnBorrar":
 			vaciar();
@@ -130,21 +151,29 @@ public class VtnDepartamento extends JInternalFrame implements ActionListener{
 	}
 
 	
-	/*public void guardar(){
-		String nombre = txtNombre.getText();
-		String empleado= txtEmpleado.getText();
-	
+	private void guardar() {
+
+		String nombreDepartamento = txtNombre.getText();
+		Empleado empleado= (Empleado)comEmpleado.getSelectedItem();
 		
-	//	ge.
-	//	JOptionPane.showMessageDialog(this, "Datos guardados", 
-				"Mensaje de información", JOptionPane.INFORMATION_MESSAGE);
+			
+		ge.agregarDepartamento(nombreDepartamento, empleado);
 		listar();
-	}
-	
-	public void listar(){
-	
 		
-	}*/
+		
+	}
+
+	private void listar() {
+		List<Departamento> departamentos = ge.getDepartamentos();
+		txtListado.setText("");
+		for (int i = 0; i < departamentos.size(); i++) {
+			Departamento departamento = departamentos.get(i);
+			System.out.println("Nombre: " + departamento.getNombreDepartamento() + "\n" + "Empleado: " + departamento.getEmpleado() + "\n");
+
+			txtListado.append("Nombre: " + departamento.getNombreDepartamento()+ "\n" + "Empleado: " + departamento.getEmpleado() + "\n");
+		}
+
+	}
 	  
 	public void terminar() {
 		int opcion = JOptionPane.showConfirmDialog(this, "Desea dar por terminado el programa ?", "Mensaje",

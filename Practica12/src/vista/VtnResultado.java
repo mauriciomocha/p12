@@ -5,9 +5,12 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
@@ -18,10 +21,15 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import controlador.GestionCompetencia;
+import modelo.Atleta;
+import modelo.Competencia;
+import modelo.Departamento;
+import modelo.Resultado;
 
 public class VtnResultado extends JInternalFrame implements ActionListener{
 	private JTextField txtPuesto;
 	private JTextField txtAtleta;
+	private JComboBox comAtleta;
 	private JTextArea txtListado;
 
 	private GestionCompetencia gc;
@@ -41,7 +49,8 @@ public class VtnResultado extends JInternalFrame implements ActionListener{
 		setSize(369, 335);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(new GridLayout(2, 1));
-
+       comAtleta=new JComboBox();
+       cargarVtnAtleta();
 		JLabel etiqueta1 = new JLabel("Puesto: ");
 		JLabel etiqueta2 = new JLabel("Atleta: ");
 
@@ -69,7 +78,7 @@ public class VtnResultado extends JInternalFrame implements ActionListener{
 		panel1.add(etiqueta1);
 		panel1.add(txtPuesto);
 		panel1.add(etiqueta2);
-		panel1.add(txtAtleta);
+		panel1.add(comAtleta);
 
 	
 
@@ -100,6 +109,17 @@ public class VtnResultado extends JInternalFrame implements ActionListener{
 		}
 
 	}
+	private void cargarVtnAtleta() {
+		Vector model = new Vector();
+		List<Atleta> atletas = gc.getAtletas();
+
+		for (int i = 0; i < atletas.size(); i++) {
+			Atleta atleta = atletas.get(i);
+			model.addElement(atleta);
+		}
+		comAtleta = new JComboBox(model);
+
+	}
 
 	public void actionPerformed(ActionEvent evt) {
 		// System.out.println("evento boton");
@@ -113,7 +133,7 @@ public class VtnResultado extends JInternalFrame implements ActionListener{
 			terminar();
 			break;
 		case "btnAnadir":
-			//guardar();
+			guardar();
 			break;
 		case "btnBorrar":
 			vaciar();
@@ -125,22 +145,29 @@ public class VtnResultado extends JInternalFrame implements ActionListener{
 	}
 
 	
-	/*public void guardar(){
+	private void guardar() {
+
 		String puesto = txtPuesto.getText();
-		String atleta= txtAtleta.getText();
-	
+		Atleta atleta= (Atleta)comAtleta.getSelectedItem();
 		
-	//	ge.
-	//	JOptionPane.showMessageDialog(this, "Datos guardados", 
-				"Mensaje de información", JOptionPane.INFORMATION_MESSAGE);
+			
+		gc.agregarResultado(puesto, atleta);
 		listar();
-	}
-	
-	public void listar(){
-	
 		
-	}*/
-	  
+		
+	}
+
+	private void listar() {
+		List<Resultado> resultados = gc.getResultados();
+		txtListado.setText("");
+		for (int i = 0; i < resultados.size(); i++) {
+			Resultado resultado = resultados.get(i);
+			System.out.println("Puesto: " + resultado.getPuesto() + "\n" + "Resultado: " + resultado.getAtleta() + "\n");
+
+			txtListado.append("Puesto: " + resultado.getPuesto() + "\n" + "Resultado: " + resultado.getAtleta() + "\n");
+		}
+
+	}
 	public void terminar() {
 		int opcion = JOptionPane.showConfirmDialog(this, "Desea dar por terminado el programa ?", "Mensaje",
 				JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);

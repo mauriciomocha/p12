@@ -13,34 +13,38 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import controlador.GestionCompetencia;
+import controlador.GestionEmpresa;
 import controlador.GestionEquipo;
 import controlador.GestionPaciente;
-<<<<<<< HEAD
-=======
+
 import controlador.GestionPais;
 import controlador.GestionRevista;
->>>>>>> branch 'master' of https://github.com/ChristianMocha/p12.git
+
 
 public class VentanaPrincipal extends JFrame implements ActionListener {
 
 	private JDesktopPane escritorio;
 	private GestionEquipo ge;
 	private GestionPaciente gp;
-<<<<<<< HEAD
-=======
+
 	private GestionRevista ga;
 	private GestionPais gpai;
->>>>>>> branch 'master' of https://github.com/ChristianMocha/p12.git
+	private GestionEmpresa gem;
+	private GestionCompetencia gc;
+
 
 	public VentanaPrincipal() {
 		initComponets();
 		ge = new GestionEquipo();
-<<<<<<< HEAD
+
 		gp=new GestionPaciente();
-=======
+
 		ga = new GestionRevista();
 		gpai = new GestionPais();
->>>>>>> branch 'master' of https://github.com/ChristianMocha/p12.git
+		gem=new GestionEmpresa();
+		gc=new GestionCompetencia();
+
 
 	}
 
@@ -55,28 +59,28 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 
 		JMenuBar barra = new JMenuBar();
 
-<<<<<<< HEAD
+
 		// aqui ponga el menu segun su orden......yo por ejemplo soy el ultimo y puse
 		// vtn 25 en
 		// adelante xq son 12 ventanas por cabeza ...agan cuenta con las ventanas de las
 		// tablas....
-=======
+
 		// aqui ponga el menu segun su orden......yo por ejemplo soy el ultimo y
 		// puse vtn 25 en
 		// adelante xq son 12 ventanas por cabeza ...agan cuenta con las
 		// ventanas de las tablas....
 		JMenu menuRevista = new JMenu("Revista");
->>>>>>> branch 'master' of https://github.com/ChristianMocha/p12.git
+
 		JMenu menuEquipo = new JMenu("Equipo");
 		JMenu menuPaciente = new JMenu("Paciente");
 		JMenu menuPais = new JMenu("Pais");
+		JMenu menuEmpresa=new JMenu("Empresa");
+		JMenu menuCompetencia=new JMenu("Competencia");
 		JMenu menuSalir = new JMenu("Salir");
 
 		// aki ponga su subventanas...en el mismo menu ponga las ventans de las
 		// tablas...
-<<<<<<< HEAD
-=======
-		
+
 		JMenuItem autores = new JMenuItem("Datos de autor");
 		autores.addActionListener(this);
 		autores.setActionCommand("Autor");
@@ -115,7 +119,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 
 		
 
->>>>>>> branch 'master' of https://github.com/ChristianMocha/p12.git
+
 		JMenuItem jugadores = new JMenuItem("Datos del Jugador");
 		jugadores.addActionListener(this);
 		jugadores.setActionCommand("Jugador");
@@ -131,7 +135,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		fichaInscripcion.setActionCommand("Inscripcion");
 		menuEquipo.add(fichaInscripcion);
 
-<<<<<<< HEAD
+
 		// tablas....equipo
 
 		JMenuItem tblJugador = new JMenuItem("Tabla  Jugador");
@@ -150,9 +154,9 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		menuEquipo.add(tblFichaInscripcion);
 
 		// fin tablas
-=======
+
 		// aqui viene las tablas de JMenuItem del equipo.....
->>>>>>> branch 'master' of https://github.com/ChristianMocha/p12.git
+
 
 		JMenuItem pacientes = new JMenuItem("Datos del Paciente");
 		pacientes.addActionListener(this);
@@ -168,26 +172,21 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		medicos.addActionListener(this);
 		medicos.setActionCommand("Medico");
 		menuPaciente.add(medicos);
-<<<<<<< HEAD
-		
-=======
->>>>>>> branch 'master' of https://github.com/ChristianMocha/p12.git
+
 		// aki falta las tablas de JMenuItem de pacientes....
 
-<<<<<<< HEAD
+
 		JMenuItem tblPaciente = new JMenuItem("Tabla Paciente");
 		tblPaciente.addActionListener(this);
 		tblPaciente.setActionCommand("tblPaciente");
 		menuPaciente.add(tblPaciente);
-=======
+
 		/*
 		 * tblRect = new JMenuItem(lang.getString("TblRectores"));
 		 * tblRect.addActionListener(this);
 		 * tblRect.setActionCommand("tblRectores"); Ventana1.add(tblRect);
 		 */
->>>>>>> branch 'master' of https://github.com/ChristianMocha/p12.git
 
-<<<<<<< HEAD
 		JMenuItem tblConsulta = new JMenuItem("Tabla de Consultas");
 		tblConsulta.addActionListener(this);
 		tblConsulta.setActionCommand("tblConsulta");
@@ -197,6 +196,84 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		tblMedico.addActionListener(this);
 		tblMedico.setActionCommand("tblMedico");
 		menuPaciente.add(tblMedico);
+		
+		
+		JMenuItem empleados = new JMenuItem("Datos del Empleado");
+		empleados.addActionListener(this);
+		empleados.setActionCommand("Empleado");
+		menuEmpresa.add(empleados);
+		
+
+		JMenuItem departamento = new JMenuItem("Datos del Departamento");
+		departamento.addActionListener(this);
+		departamento.setActionCommand("Departamento");
+		menuEmpresa.add(departamento);
+		
+
+		JMenuItem empresas = new JMenuItem("Datos de la Empresa");
+		empresas.addActionListener(this);
+		empresas.setActionCommand("Empresa");
+		menuEmpresa.add(empresas);
+		
+
+		JMenuItem tblEmpleado = new JMenuItem("Tabla Empleado");
+		tblEmpleado.addActionListener(this);
+		tblEmpleado.setActionCommand("tblEmpleado");
+		menuEmpresa.add(tblEmpleado);
+		
+
+		JMenuItem tblDepartamento = new JMenuItem("Tabla Departamento");
+		tblDepartamento.addActionListener(this);
+		tblDepartamento.setActionCommand("tblDepartamento");
+		menuEmpresa.add(tblDepartamento);
+
+		
+
+		JMenuItem tblEmpresa = new JMenuItem("Tabla Empresa");
+		tblEmpresa.addActionListener(this);
+		tblEmpresa.setActionCommand("tblEmpresa");
+		menuEmpresa.add(tblEmpresa);
+		
+		
+		
+		JMenuItem atletas = new JMenuItem("Datos del Atleta");
+		atletas.addActionListener(this);
+		atletas.setActionCommand("Atleta");
+		menuCompetencia.add(atletas);
+		
+
+		JMenuItem resultado = new JMenuItem("Datos del Resultado");
+		resultado.addActionListener(this);
+		resultado.setActionCommand("Resultado");
+		menuCompetencia.add(resultado);
+		
+
+		JMenuItem competencias = new JMenuItem("Datos de la Competencia");
+		competencias.addActionListener(this);
+		competencias.setActionCommand("Competencia");
+		menuCompetencia.add(competencias);
+		
+
+		JMenuItem tblAtleta = new JMenuItem("Tabla Atleta");
+		tblAtleta.addActionListener(this);
+		tblAtleta.setActionCommand("tblAtleta");
+		menuCompetencia.add(tblAtleta);
+		
+
+		JMenuItem tblResultado = new JMenuItem("Tabla Resultado");
+		tblResultado.addActionListener(this);
+		tblResultado.setActionCommand("tblResultado");
+		menuCompetencia.add(tblResultado);
+
+		
+
+		JMenuItem tblCompetencia= new JMenuItem("Tabla Competencia");
+		tblCompetencia.addActionListener(this);
+		tblCompetencia.setActionCommand("tblCompetencia");
+		menuCompetencia.add(tblCompetencia);
+
+	
+
 
 		// fin tablas...
 
@@ -206,8 +283,6 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		 * Ventana1.add(tblRect);
 		 */
 
-=======
->>>>>>> branch 'master' of https://github.com/ChristianMocha/p12.git
 		JMenuItem salir = new JMenuItem("Salir");
 		salir.addActionListener(this);
 		salir.setActionCommand("Salir");
@@ -217,7 +292,10 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		barra.add(menuEquipo);
 		barra.add(menuPaciente);
 		barra.add(menuPais);
+		barra.add(menuEmpresa);
+		barra.add(menuCompetencia);
 		barra.add(menuSalir);
+	
 		setJMenuBar(barra);
 	}
 
@@ -292,17 +370,61 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		case "tblMedico":
 			tblMedico();
 			break;
+		case "Empresa":
+			empresa();
+			break;
+
+		case "Departamento":
+			departamento();
+			break;
+
+		case "Empleado":
+			empleado();
+			break;
+
+		case "tblEmpresa":
+			tblEmpresa();
+			break;
+
+		case "tblDepartamento":
+			tblDepartamento();
+			break;
+
+		case "tblEmpleado":
+			tblEmpleado();
+		case "Atleta":
+			atleta();
+			break;
+
+		case "Resultado":
+			resultado();
+			break;
+
+		case "Competencia":
+			competencia();
+			break;
+
+		case "tblAtleta":
+			tblAtleta();
+			break;
+
+		case "tblResultado":
+			tblResultado();
+			break;
+
+		case "tblCompetencia":
+			tblCompetencia();
 
 		case "Salir":
 			salir();
+		
 			break;
 		default:
 			break;
 		}
 
 	}
-<<<<<<< HEAD
-=======
+
 
 	private void revistas() {
 		VtnRevista vtn1 = new VtnRevista(this.ga);
@@ -395,7 +517,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		}
 
 	}
->>>>>>> branch 'master' of https://github.com/ChristianMocha/p12.git
+
 
 	private void jugadores() {
 		VtnJugador vtn25 = new VtnJugador(this.ge);
@@ -436,7 +558,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 
 	}
 
-<<<<<<< HEAD
+
 	private void tblJugador() {
 		VtnTblJugador vtn28 = new VtnTblJugador(this.ge);
 		vtn28.setVisible(true);
@@ -476,8 +598,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 
 	}
 
-=======
->>>>>>> branch 'master' of https://github.com/ChristianMocha/p12.git
+
 	private void pacientes() {
 		VtnPaciente vtn31 = new VtnPaciente(this.gp);
 		vtn31.setVisible(true);
@@ -518,7 +639,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		}
 
 	}
-<<<<<<< HEAD
+
 
 	private void tblPaciente() {
 		VtnTblPaciente vtn34 = new VtnTblPaciente(this.gp);
@@ -558,8 +679,134 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 		}
 
 	}
-=======
->>>>>>> branch 'master' of https://github.com/ChristianMocha/p12.git
+	private void empresa() {
+		VtnEmpresa vtnE=new VtnEmpresa(this.gem);
+		vtnE.setVisible(true);
+		escritorio.add(vtnE);
+		try {
+			vtnE.setSelected(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		
+	}
+	private void departamento() {
+		VtnDepartamento vtnD=new VtnDepartamento(this.gem);
+		vtnD.setVisible(true);
+		escritorio.add(vtnD);
+		try {
+			vtnD.setSelected(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+	private void empleado() {
+		VtnEmpleado vtnEm=new VtnEmpleado(this.gem);
+		vtnEm.setVisible(true);
+		escritorio.add(vtnEm);
+		try {
+			vtnEm.setSelected(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+	private void tblEmpresa() {
+		VtnTblEmpresa tblE=new VtnTblEmpresa(this.gem);
+		tblE.setVisible(true);
+		escritorio.add(tblE);
+		try {
+			tblE.setSelected(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+	private void tblDepartamento() {
+		VtnTblDepartamento tblD=new VtnTblDepartamento(this.gem);
+		tblD.setVisible(true);
+		escritorio.add(tblD);
+		try {
+			tblD.setSelected(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+	private void tblEmpleado() {
+		VtnTblEmpleado tblEm=new VtnTblEmpleado(this.gem);
+		tblEm.setVisible(true);
+		escritorio.add(tblEm);
+		try {
+			tblEm.setSelected(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+	public void atleta() {
+		VtnAtleta vtnA=new VtnAtleta(this.gc);
+		vtnA.setVisible(true);
+		escritorio.add(vtnA);
+		try {
+			vtnA.setSelected(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void resultado() {
+		VtnResultado vtnR=new VtnResultado(this.gc); 
+		vtnR.setVisible(true);
+		escritorio.add(vtnR);
+		try {
+			vtnR.setSelected(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void competencia() {
+		VtnCompetencia vtnCo=new VtnCompetencia(this.gc);
+		vtnCo.setVisible(true);
+		escritorio.add(vtnCo);
+		try {
+			vtnCo.setSelected(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void tblAtleta() {
+		VtnTblAtleta tblA=new VtnTblAtleta(this.gc);
+		tblA.setVisible(true);
+		escritorio.add(tblA);
+		try {
+			tblA.setSelected(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void tblResultado() {
+		VtnTblResultado tblR=new VtnTblResultado(this.gc);
+		tblR.setVisible(true);
+		escritorio.add(tblR);
+		try {
+			tblR.setSelected(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void tblCompetencia() {
+		VtnTblCompetencia tblC=new VtnTblCompetencia(this.gc);
+		tblC.setVisible(true);
+		escritorio.add(tblC);
+		try {
+			tblC.setSelected(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 
 	public void salir() {
 		System.exit(0);
