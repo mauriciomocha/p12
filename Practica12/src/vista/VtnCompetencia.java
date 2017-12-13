@@ -5,9 +5,12 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
@@ -19,11 +22,16 @@ import javax.swing.JTextField;
 
 import controlador.GestionCompetencia;
 import controlador.GestionEmpresa;
+import modelo.Competencia;
+import modelo.Departamento;
+import modelo.Empleado;
+import modelo.Resultado;
 
 public class VtnCompetencia extends JInternalFrame implements ActionListener{
 	private JTextField txtNombre;
 	private JTextField txtTipo;
 	private JTextField txtResultado;
+	private JComboBox comResultado;
 	private JTextArea txtListado;
 
 	private GestionCompetencia gc;
@@ -43,7 +51,9 @@ public class VtnCompetencia extends JInternalFrame implements ActionListener{
 		setSize(369, 335);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(new GridLayout(2, 1));
-
+        comResultado=new JComboBox();
+        cargarVtnResultado();
+        
 		JLabel etiqueta1 = new JLabel("Nombre Competencia: ");
 		JLabel etiqueta2 = new JLabel("Tipo:: ");
 		JLabel etiqueta3 = new JLabel("Resultado: ");
@@ -74,7 +84,7 @@ public class VtnCompetencia extends JInternalFrame implements ActionListener{
 		panel1.add(etiqueta2);
 		panel1.add(txtTipo);
 		panel1.add(etiqueta3);
-		panel1.add(txtResultado);
+		panel1.add(comResultado);
 	
 
 		panel1.add(boton1, BorderLayout.SOUTH);
@@ -104,6 +114,17 @@ public class VtnCompetencia extends JInternalFrame implements ActionListener{
 		}
 
 	}
+	private void cargarVtnResultado() {
+		Vector model = new Vector();
+		List<Resultado> resultados = gc.getResultados();
+
+		for (int i = 0; i < resultados.size(); i++) {
+			Resultado resultado= resultados.get(i);
+			model.addElement(resultado);
+		}
+		comResultado = new JComboBox(model);
+
+	}
 
 	public void actionPerformed(ActionEvent evt) {
 		// System.out.println("evento boton");
@@ -117,7 +138,7 @@ public class VtnCompetencia extends JInternalFrame implements ActionListener{
 			terminar();
 			break;
 		case "btnAnadir":
-			//guardar();
+			guardar();
 			break;
 		case "btnBorrar":
 			vaciar();
@@ -129,21 +150,30 @@ public class VtnCompetencia extends JInternalFrame implements ActionListener{
 	}
 
 	
-	/*public void guardar(){
+	private void guardar() {
+
 		String nombre = txtNombre.getText();
-		String tipo= txtTipo.getText();
-		String resultado=txtResultado.getText();
+		String tipoCompetencia=txtTipo.getText();
+		Resultado resultado= (Resultado)comResultado.getSelectedItem();
 		
-	//	ge.
-	//	JOptionPane.showMessageDialog(this, "Datos guardados", 
-				"Mensaje de información", JOptionPane.INFORMATION_MESSAGE);
+			
+		gc.agregarCompetencia(nombre, tipoCompetencia, resultado);
 		listar();
-	}
-	
-	public void listar(){
-	
 		
-	}*/
+		
+	}
+
+	private void listar() {
+		List<Competencia> competencias = gc.getCompetencias();
+		txtListado.setText("");
+		for (int i = 0; i < competencias.size(); i++) {
+			Competencia competencia = competencias.get(i);
+			System.out.println("Nombre: " + competencia.getNombre() + "\n" + "Tipo: " + competencia.getTipoCompetencia() + "\n"+"Resultado: "+competencia.getResultado()+"\n");
+
+			txtListado.append("Nombre: " + competencia.getNombre() + "\n" + "Tipo: " + competencia.getTipoCompetencia() + "\n"+"Resultado: "+competencia.getResultado()+"\n");
+		}
+
+	}
 	  
 	public void terminar() {
 		int opcion = JOptionPane.showConfirmDialog(this, "Desea dar por terminado el programa ?", "Mensaje",

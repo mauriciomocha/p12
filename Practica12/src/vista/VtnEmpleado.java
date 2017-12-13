@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -18,6 +19,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import controlador.GestionEmpresa;
+import modelo.Empleado;
+import modelo.Paciente;
 
 public class VtnEmpleado extends JInternalFrame implements ActionListener{
 	private JTextField txtNombre;
@@ -126,7 +129,7 @@ public class VtnEmpleado extends JInternalFrame implements ActionListener{
 			terminar();
 			break;
 		case "btnAnadir":
-			//guardar();
+			guardar();
 			break;
 		case "btnBorrar":
 			vaciar();
@@ -138,22 +141,42 @@ public class VtnEmpleado extends JInternalFrame implements ActionListener{
 	}
 
 	
-	/*public void guardar(){
+	private void guardar() {
+
 		String nombre = txtNombre.getText();
-		String apellido= txtApellido.getText();
-		String cedula=txtCedula.getText();
-    	String edad=txtEdad.getText();
+		String apellido = txtApellido.getText();
+		String cedula = txtCedula.getText();
+		int edad = Integer.parseInt(txtEdad.getText());
 		
-	//	ge.
-	//	JOptionPane.showMessageDialog(this, "Datos guardados", 
-				"Mensaje de información", JOptionPane.INFORMATION_MESSAGE);
+	try {
+		
+		if(ge.isCedulaValida(cedula)) {
+			
+		ge.agregarEmpleado(nombre, apellido, cedula, edad);
 		listar();
-	}
-	
-	public void listar(){
-	
 		
-	}*/
+		}
+	}catch (Exception e) {
+		JOptionPane.showMessageDialog(this, e.getMessage(),
+				"Mensaje de error", JOptionPane.ERROR_MESSAGE);
+		e.printStackTrace();
+	}
+	}
+
+	private void listar() {
+		List<Empleado> empleados = ge.getEmpleados();
+		txtListado.setText("");
+		for (int i = 0; i < empleados.size(); i++) {
+			Empleado empleado = empleados.get(i);
+			System.out.println("Nombre: " + empleado.getNombre() + "\n" + "Apellido: " + empleado.getApellido() + "\n"
+					+ "Cedula: " + empleado.getCedula() + "\n" + "Edad: " + empleado.getEdad() + "\n");
+
+			txtListado.append("Nombre: " + empleado.getNombre() + "\n" + "Apellido: " + empleado.getApellido() + "\n"
+					+ "Cedula: " + empleado.getCedula() + "\n" + "Edad: " + empleado.getEdad() + "\n");
+		}
+
+	}
+
 	  
 	public void terminar() {
 		int opcion = JOptionPane.showConfirmDialog(this, "Desea dar por terminado el programa ?", "Mensaje",
