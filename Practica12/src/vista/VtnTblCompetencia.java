@@ -34,7 +34,7 @@ public class VtnTblCompetencia extends JInternalFrame implements ActionListener 
 		getContentPane().setLayout(new BorderLayout());
 		JPanel pnlTitulo = new JPanel(new FlowLayout());
 
-		JLabel lblTitulo = new JLabel("Datos de Comptetencia");
+		JLabel lblTitulo = new JLabel("Datos de Competencia");
 		pnlTitulo.add(lblTitulo);
 
 		tblCompetencia = new JTable();

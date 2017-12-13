@@ -269,7 +269,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 
 		JMenuItem tblCompetencia= new JMenuItem("Tabla Competencia");
 		tblCompetencia.addActionListener(this);
-		tblCompetencia.setActionCommand("tblEmpresa");
+		tblCompetencia.setActionCommand("tblCompetencia");
 		menuCompetencia.add(tblCompetencia);
 
 	
