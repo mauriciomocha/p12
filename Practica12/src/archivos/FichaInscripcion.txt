@@ -1,0 +1,7 @@
+Nombre Jugador: criss;
+Apellido Jugador: mc
+Nombre del Equipo: asiatico
+ Cantidad de Jugadores: 12
+ Nacionalidad: Ecuatoriano
+
+DATOS DE LA FICHA DE INSCRIPCION 

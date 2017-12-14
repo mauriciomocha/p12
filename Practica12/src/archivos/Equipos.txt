@@ -1,0 +1,6 @@
+Nombre Jugador: criss;
+Apellido Jugador: mc
+Nombre del Equipo: asiatico
+ Cantidad de Jugadores: 12
+
+DATOS DEL EQUIPO 

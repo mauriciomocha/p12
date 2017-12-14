@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -71,6 +72,10 @@ public class VtnFichaInscripcion extends JInternalFrame implements ActionListene
 		JButton borrar = new JButton("Borrar");
 		borrar.addActionListener(this);
 		borrar.setActionCommand("btnBorrar");
+		
+		JButton leer =new JButton("Leer");
+		leer.addActionListener(this);
+		leer.setActionCommand("btnLeer");
 
 		JButton salir = new JButton("Salir");
 		salir.addActionListener(this);
@@ -101,6 +106,7 @@ public class VtnFichaInscripcion extends JInternalFrame implements ActionListene
 		getContentPane().add(panel2);
 
 		panel2.add(baja);
+		panel2.add(leer,BorderLayout.SOUTH);
 		panel2.add(salir, BorderLayout.SOUTH);
 
 	}
@@ -142,6 +148,14 @@ public class VtnFichaInscripcion extends JInternalFrame implements ActionListene
 		case "btnBorrar":
 			borrar();
 			break;
+		case "btnLeer":
+			try {
+				leer();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			break;
 		case "btnSalir":
 			salir();
 			break;
@@ -150,6 +164,11 @@ public class VtnFichaInscripcion extends JInternalFrame implements ActionListene
 			break;
 		}
 
+	}
+
+	private void leer() throws IOException {
+		txtListado.append(ge.leerFichaDeInscripcion());
+		
 	}
 
 	private void salir() {
@@ -164,6 +183,9 @@ public class VtnFichaInscripcion extends JInternalFrame implements ActionListene
 	private void borrar() {
 		txtdorsal.setText("");
 		txtnacionalidad.setText("");
+		txtListado.setText("");
+		JOptionPane.showMessageDialog(this, "Borrando Datos...", "Mensaje de información",
+				JOptionPane.INFORMATION_MESSAGE);
 
 	}
 
@@ -175,6 +197,8 @@ public class VtnFichaInscripcion extends JInternalFrame implements ActionListene
 		Equipo equipo = (Equipo) comEquipo.getSelectedItem();
 
 		ge.agregarFichaDeInscripcion(jugador, equipo, dorsal, nacionalidad);
+		JOptionPane.showMessageDialog(this, "Datos Guardados...", "Mensaje de información",
+				JOptionPane.INFORMATION_MESSAGE);
 		listar();
 
 	}

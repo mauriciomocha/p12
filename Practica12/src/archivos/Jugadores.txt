@@ -1,0 +1,6 @@
+Nombre Jugador: criss;
+Apellido Jugador: mc
+Cedula del Jugador: 0107422545
+Edad del Jugador: 12
+
+DATOS DEL JUGADOR 

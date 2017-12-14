@@ -1,0 +1,12 @@
+Nombre del Paciente: criss
+Apellido del Paciente: ar
+Cedula del Paciente: 0107422545
+Edad del Paciente: 12
+
+DATOS DEL PACIENTE
+Nombre del Paciente: criss
+Apellido del Paciente: mc
+Cedula del Paciente: 0107422545
+Edad del Paciente: 2
+
+DATOS DEL PACIENTE

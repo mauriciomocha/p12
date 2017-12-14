@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -66,6 +67,10 @@ public class VtnEquipo extends JInternalFrame implements ActionListener {
 		JButton borrar = new JButton("Borrar");
 		borrar.addActionListener(this);
 		borrar.setActionCommand("btnBorrar");
+		
+		JButton leer =new JButton("Leer");
+		leer.addActionListener(this);
+		leer.setActionCommand("btnLeer");
 
 		JButton salir = new JButton("Salir");
 		salir.addActionListener(this);
@@ -93,6 +98,7 @@ public class VtnEquipo extends JInternalFrame implements ActionListener {
 		getContentPane().add(panel2);
 
 		panel2.add(baja);
+		panel2.add(leer,BorderLayout.SOUTH);
 		panel2.add(salir, BorderLayout.SOUTH);
 
 	}
@@ -122,6 +128,14 @@ public class VtnEquipo extends JInternalFrame implements ActionListener {
 		case "btnBorrar":
 			borrar();
 			break;
+		case "btnLeer":
+			try {
+				leer();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			break;
 		case "btnSalir":
 			salir();
 			break;
@@ -130,6 +144,11 @@ public class VtnEquipo extends JInternalFrame implements ActionListener {
 			break;
 		}
 
+	}
+
+	private void leer() throws IOException {
+		txtListado.append(ge.leerEquipo());
+		
 	}
 
 	private void salir() {
@@ -144,7 +163,9 @@ public class VtnEquipo extends JInternalFrame implements ActionListener {
 	private void borrar() {
 		txtcatindadJugador.setText("");
 		txtnombreEquipo.setText("");
-
+		txtListado.setText("");
+		JOptionPane.showMessageDialog(this, "Borrando Datos...", "Mensaje de información",
+				JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	private void guardar() {
@@ -154,6 +175,8 @@ public class VtnEquipo extends JInternalFrame implements ActionListener {
 		Jugador jugador = (Jugador) comJugador.getSelectedItem();
 
 		ge.agregarEquipo(jugador, nombreEquipo, cantidadJugador);
+		JOptionPane.showMessageDialog(this, "Datos Guardados...", "Mensaje de información",
+				JOptionPane.INFORMATION_MESSAGE);
 		
 		listar();
 
@@ -175,5 +198,7 @@ public class VtnEquipo extends JInternalFrame implements ActionListener {
 		}
 
 	}
+	
+	
 
 }

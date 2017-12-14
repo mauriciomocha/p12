@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.List;
 import java.util.Vector;
 
@@ -69,6 +70,10 @@ public class VtnConsulta  extends JInternalFrame implements ActionListener {
 		JButton borrar = new JButton("Borrar");
 		borrar.addActionListener(this);
 		borrar.setActionCommand("btnBorrar");
+		
+		JButton leer=new JButton("Leer");
+		leer.addActionListener(this);
+		leer.setActionCommand("btnLeer");
 
 		JButton salir = new JButton("Salir");
 		salir.addActionListener(this);
@@ -99,6 +104,7 @@ public class VtnConsulta  extends JInternalFrame implements ActionListener {
 		getContentPane().add(panel2);
 
 		panel2.add(baja);
+		panel2.add(leer,BorderLayout.SOUTH);
 		panel2.add(salir, BorderLayout.SOUTH);
 
 	}
@@ -128,6 +134,14 @@ public class VtnConsulta  extends JInternalFrame implements ActionListener {
 		case "btnBorrar":
 			borrar();
 			break;
+		case "btnLeer":
+			try {
+				leer();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			break;
 		case "btnSalir":
 			salir();
 			break;
@@ -136,6 +150,11 @@ public class VtnConsulta  extends JInternalFrame implements ActionListener {
 			break;
 		}
 
+	}
+
+	private void leer() throws IOException {
+		txtListado.append(gp.leerConsulta());
+		
 	}
 
 	private void salir() {
@@ -151,6 +170,9 @@ public class VtnConsulta  extends JInternalFrame implements ActionListener {
 		txthora.setText("");
 		txtnumConsulta.setText("");
 		txtcostoConsulta.setText("");
+		txtListado.setText("");
+		JOptionPane.showMessageDialog(this, "Borrando Datos...", "Mensaje de información",
+				JOptionPane.INFORMATION_MESSAGE);
 		
 
 	}
@@ -163,6 +185,9 @@ public class VtnConsulta  extends JInternalFrame implements ActionListener {
 		Paciente paciente = (Paciente) comPaciente.getSelectedItem();
 
 		gp.agregarConsulta( hora,  numconsulta,  costoConsulta,  paciente);
+		
+		JOptionPane.showMessageDialog(this, "Datos Guardados...", "Mensaje de información",
+				JOptionPane.INFORMATION_MESSAGE);
 		listar();
 
 	}

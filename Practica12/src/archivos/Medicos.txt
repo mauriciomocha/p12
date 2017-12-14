@@ -1,0 +1,18 @@
+Nombre Medico: ronaldo
+Apellido Medico: zhingri
+Cedula del Medico: 0107427638
+Titulo del Medico: medico
+Hora de la Consulta: 2
+Costo de la Consulta: 4
+ Edad del Medico 2
+
+DATOS DEL Medico
+Nombre Medico: ronaldo
+Apellido Medico: zhingri
+Cedula del Medico: 0107427638
+Titulo del Medico: medico
+Hora de la Consulta: 2
+Costo de la Consulta: 4
+ Edad del Medico 2
+
+DATOS DEL Medico

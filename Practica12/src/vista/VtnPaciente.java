@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -13,6 +14,7 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -40,6 +42,8 @@ public class VtnPaciente extends JInternalFrame implements ActionListener {
 
 		getContentPane().setLayout(new GridLayout(2, 1));
 		JPanel pnlTitulo = new JPanel(new FlowLayout());
+		
+	
 
 		JLabel nombre = new JLabel("Nombre: ");
 		JLabel apellido = new JLabel("Apellido: ");
@@ -51,6 +55,8 @@ public class VtnPaciente extends JInternalFrame implements ActionListener {
 		txtcedula = new JTextField(15);
 		txtedad = new JTextField(15);
 		txtListado = new JTextArea(7, 40);
+		
+		JScrollPane baja=new JScrollPane(txtListado);
 
 		JButton guardar = new JButton("Guardar");
 		guardar.addActionListener(this);
@@ -59,6 +65,10 @@ public class VtnPaciente extends JInternalFrame implements ActionListener {
 		JButton borrar = new JButton("Borrar");
 		borrar.addActionListener(this);
 		borrar.setActionCommand("btnBorrar");
+		
+		JButton leer=new JButton("Leer");
+		leer.addActionListener(this);
+		leer.setActionCommand("btnLeer");
 
 		JButton salir = new JButton("Salir");
 		salir.addActionListener(this);
@@ -86,7 +96,8 @@ public class VtnPaciente extends JInternalFrame implements ActionListener {
 		panel2.setBorder(BorderFactory.createTitledBorder("Listado"));
 		getContentPane().add(panel2);
 
-		panel2.add(txtListado);
+		panel2.add(baja);
+		panel2.add(leer,BorderLayout.SOUTH);
 		panel2.add(salir, BorderLayout.SOUTH);
 
 	}
@@ -104,6 +115,14 @@ public class VtnPaciente extends JInternalFrame implements ActionListener {
 		case "btnBorrar":
 			borrar();
 			break;
+		case "btnLeer":
+			try {
+				leer();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			break;
 		case "btnSalir":
 			salir();
 			break;
@@ -112,6 +131,11 @@ public class VtnPaciente extends JInternalFrame implements ActionListener {
 			break;
 		}
 
+	}
+
+	private void leer() throws IOException {
+		txtListado.append(gp.leerPaciente());
+		
 	}
 
 	private void salir() {
@@ -128,6 +152,9 @@ public class VtnPaciente extends JInternalFrame implements ActionListener {
 		txtapellido.setText("");
 		txtcedula.setText("");
 		txtedad.setText("");
+		txtListado.setText("");
+		JOptionPane.showMessageDialog(this, "Borrando Datos...", "Mensaje de información",
+				JOptionPane.INFORMATION_MESSAGE);
 
 	}	
 	private void guardar() {
@@ -142,6 +169,8 @@ public class VtnPaciente extends JInternalFrame implements ActionListener {
 		if(gp.isCedulaValida(cedula)) {
 			
 		gp.agregarPaciente(nombre, apellido, cedula, edad);
+		JOptionPane.showMessageDialog(this, "Datos Guardados...", "Mensaje de información",
+				JOptionPane.INFORMATION_MESSAGE);
 		listar();
 		
 		}

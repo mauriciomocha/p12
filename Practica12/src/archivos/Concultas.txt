@@ -1,0 +1,16 @@
+Hora de la consulta: 12
+numConsulta: 3
+Costo de la consulta: 3
+Nombre del Paciente: criss
+Apellido del Paciente: ar
+Cedula del Paciente: 0107422545
+
+DATOS DE LA CONSULTA
+Hora de la consulta: 2
+numConsulta: 4
+Costo de la consulta: 4
+Nombre del Paciente: criss
+Apellido del Paciente: mc
+Cedula del Paciente: 0107422545
+
+DATOS DE LA CONSULTA
